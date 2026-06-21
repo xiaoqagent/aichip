@@ -49,21 +49,24 @@ export default class EntryAbility extends UIAbility {
     }
 
     // 版本升级检查：比对内置DB版本和沙箱DB版本
-    const store = await RdbHelper.getStore(ctx)
-    let sandboxVersion = 1
+    let sandboxVersion = 0  // 默认0，空表=0会自动触发升级
     try {
-      const rs = await store.querySql('SELECT MAX(db_version) as v FROM chips')
-      if (rs.goToFirstRow()) {
-        sandboxVersion = rs.getLong(rs.getColumnIndex('v'))
+      const store = await RdbHelper.getStore(ctx)
+      try {
+        const rs = await store.querySql('SELECT COALESCE(MAX(db_version), 0) as v FROM chips')
+        if (rs.goToFirstRow()) {
+          sandboxVersion = rs.getLong(rs.getColumnIndex('v'))
+        }
+        rs.close()
+      } catch (e) {
+        hilog.warn(0x0001, TAG, 'Version read failed (table may not exist), treating as v0')
       }
-      rs.close()
     } catch (e) {
-      hilog.warn(0x0001, TAG, 'Version read failed, assuming v1')
+      hilog.warn(0x0001, TAG, 'Store open failed, treating as v0')
     }
 
     if (AppConstants.DB_VERSION > sandboxVersion) {
       hilog.info(0x0001, TAG, `DB upgrade: sandbox v${sandboxVersion} → rawfile v${AppConstants.DB_VERSION}`)
-      await store.close()
       RdbHelper.close()
 
       // 原子覆盖
