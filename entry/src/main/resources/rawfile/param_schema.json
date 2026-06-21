@@ -1,0 +1,638 @@
+{
+  "description": "update_ai_chip_db.py 参数采集模板",
+  "version": "1.0",
+  "groups": [
+    "计算性能",
+    "内存规格",
+    "互联规格",
+    "物理规格",
+    "性能规格"
+  ],
+  "rules": {
+    "source_priority": "官网 > 3处以上一致来源 > 存疑",
+    "process_node_must": "必须标注代工厂（如 TSMC 4nm、SMIC 7nm、Samsung 1b nm）",
+    "unknown_value": "存疑",
+    "required_params_missing": "不允许提交，标记为待补全"
+  },
+  "categories": {
+    "GPU": {
+      "required": [
+        {
+          "group": "计算性能",
+          "name": "FP16算力",
+          "unit": "TFLOPS"
+        },
+        {
+          "group": "计算性能",
+          "name": "GPU核心数",
+          "unit": ""
+        },
+        {
+          "group": "内存规格",
+          "name": "显存容量",
+          "unit": "GB"
+        },
+        {
+          "group": "内存规格",
+          "name": "显存类型",
+          "unit": ""
+        },
+        {
+          "group": "内存规格",
+          "name": "显存带宽",
+          "unit": "TB/s"
+        },
+        {
+          "group": "物理规格",
+          "name": "TDP功耗",
+          "unit": "W"
+        },
+        {
+          "group": "物理规格",
+          "name": "制程工艺",
+          "unit": "nm"
+        }
+      ],
+      "optional": [
+        {
+          "group": "计算性能",
+          "name": "FP8算力",
+          "unit": "TFLOPS"
+        },
+        {
+          "group": "计算性能",
+          "name": "BF16算力",
+          "unit": "TFLOPS"
+        },
+        {
+          "group": "计算性能",
+          "name": "INT8算力",
+          "unit": "TOPS"
+        },
+        {
+          "group": "计算性能",
+          "name": "Tensor核心数",
+          "unit": ""
+        },
+        {
+          "group": "计算性能",
+          "name": "FP64算力",
+          "unit": "TFLOPS"
+        },
+        {
+          "group": "计算性能",
+          "name": "FP32算力",
+          "unit": "TFLOPS"
+        },
+        {
+          "group": "计算性能",
+          "name": "INT4算力",
+          "unit": "TOPS"
+        },
+        {
+          "group": "内存规格",
+          "name": "显存位宽",
+          "unit": "bit"
+        },
+        {
+          "group": "内存规格",
+          "name": "L2缓存",
+          "unit": "MB"
+        },
+        {
+          "group": "互联规格",
+          "name": "NVLink带宽",
+          "unit": "GB/s"
+        },
+        {
+          "group": "互联规格",
+          "name": "PCIe版本",
+          "unit": ""
+        },
+        {
+          "group": "互联规格",
+          "name": "Infinity Fabric带宽",
+          "unit": "GB/s"
+        },
+        {
+          "group": "物理规格",
+          "name": "晶体管数",
+          "unit": "亿"
+        },
+        {
+          "group": "物理规格",
+          "name": "芯片面积",
+          "unit": "mm²"
+        },
+        {
+          "group": "物理规格",
+          "name": "代工厂",
+          "unit": ""
+        },
+        {
+          "group": "物理规格",
+          "name": "封装方式",
+          "unit": ""
+        }
+      ]
+    },
+    "NPU": {
+      "required": [
+        {
+          "group": "计算性能",
+          "name": "FP16算力",
+          "unit": "TFLOPS"
+        },
+        {
+          "group": "计算性能",
+          "name": "INT8算力",
+          "unit": "TOPS"
+        },
+        {
+          "group": "计算性能",
+          "name": "AI核心数",
+          "unit": ""
+        },
+        {
+          "group": "内存规格",
+          "name": "显存容量",
+          "unit": "GB"
+        },
+        {
+          "group": "内存规格",
+          "name": "显存类型",
+          "unit": ""
+        },
+        {
+          "group": "物理规格",
+          "name": "TDP功耗",
+          "unit": "W"
+        },
+        {
+          "group": "物理规格",
+          "name": "制程工艺",
+          "unit": "nm"
+        }
+      ],
+      "optional": [
+        {
+          "group": "计算性能",
+          "name": "BF16算力",
+          "unit": "TFLOPS"
+        },
+        {
+          "group": "计算性能",
+          "name": "FP32算力",
+          "unit": "TFLOPS"
+        },
+        {
+          "group": "内存规格",
+          "name": "显存带宽",
+          "unit": "TB/s"
+        },
+        {
+          "group": "内存规格",
+          "name": "显存位宽",
+          "unit": "bit"
+        },
+        {
+          "group": "互联规格",
+          "name": "HCCS带宽",
+          "unit": "GB/s"
+        },
+        {
+          "group": "互联规格",
+          "name": "PCIe版本",
+          "unit": ""
+        },
+        {
+          "group": "物理规格",
+          "name": "能效比",
+          "unit": "TOPS/W"
+        },
+        {
+          "group": "物理规格",
+          "name": "代工厂",
+          "unit": ""
+        },
+        {
+          "group": "物理规格",
+          "name": "封装方式",
+          "unit": ""
+        }
+      ]
+    },
+    "TPU": {
+      "required": [
+        {
+          "group": "计算性能",
+          "name": "BF16算力",
+          "unit": "TFLOPS"
+        },
+        {
+          "group": "计算性能",
+          "name": "INT8算力",
+          "unit": "TOPS"
+        },
+        {
+          "group": "内存规格",
+          "name": "显存容量",
+          "unit": "GB"
+        },
+        {
+          "group": "内存规格",
+          "name": "显存类型",
+          "unit": ""
+        },
+        {
+          "group": "内存规格",
+          "name": "显存带宽",
+          "unit": "TB/s"
+        },
+        {
+          "group": "互联规格",
+          "name": "ICI互联带宽",
+          "unit": "Gbps"
+        }
+      ],
+      "optional": [
+        {
+          "group": "计算性能",
+          "name": "FP8算力",
+          "unit": "TFLOPS"
+        },
+        {
+          "group": "物理规格",
+          "name": "TDP功耗",
+          "unit": "W"
+        },
+        {
+          "group": "物理规格",
+          "name": "制程工艺",
+          "unit": "nm"
+        },
+        {
+          "group": "物理规格",
+          "name": "代工厂",
+          "unit": ""
+        }
+      ]
+    },
+    "ASIC": {
+      "required": [
+        {
+          "group": "计算性能",
+          "name": "算力规格",
+          "unit": "TFLOPS"
+        },
+        {
+          "group": "内存规格",
+          "name": "显存容量",
+          "unit": "GB"
+        },
+        {
+          "group": "内存规格",
+          "name": "显存类型",
+          "unit": ""
+        },
+        {
+          "group": "物理规格",
+          "name": "TDP功耗",
+          "unit": "W"
+        },
+        {
+          "group": "物理规格",
+          "name": "制程工艺",
+          "unit": "nm"
+        }
+      ],
+      "optional": [
+        {
+          "group": "计算性能",
+          "name": "BF16算力",
+          "unit": "TFLOPS"
+        },
+        {
+          "group": "计算性能",
+          "name": "INT8算力",
+          "unit": "TOPS"
+        },
+        {
+          "group": "计算性能",
+          "name": "FP8算力",
+          "unit": "TFLOPS"
+        },
+        {
+          "group": "内存规格",
+          "name": "显存带宽",
+          "unit": "TB/s"
+        },
+        {
+          "group": "互联规格",
+          "name": "互联带宽",
+          "unit": "GB/s"
+        },
+        {
+          "group": "物理规格",
+          "name": "代工厂",
+          "unit": ""
+        },
+        {
+          "group": "物理规格",
+          "name": "芯片类型",
+          "unit": ""
+        }
+      ]
+    },
+    "CPU": {
+      "required": [
+        {
+          "group": "计算性能",
+          "name": "核心数",
+          "unit": ""
+        },
+        {
+          "group": "计算性能",
+          "name": "线程数",
+          "unit": ""
+        },
+        {
+          "group": "计算性能",
+          "name": "基础频率",
+          "unit": "GHz"
+        },
+        {
+          "group": "物理规格",
+          "name": "TDP功耗",
+          "unit": "W"
+        },
+        {
+          "group": "物理规格",
+          "name": "制程工艺",
+          "unit": "nm"
+        }
+      ],
+      "optional": [
+        {
+          "group": "计算性能",
+          "name": "最大频率",
+          "unit": "GHz"
+        },
+        {
+          "group": "计算性能",
+          "name": "AI加速引擎",
+          "unit": ""
+        },
+        {
+          "group": "内存规格",
+          "name": "最大内存",
+          "unit": "GB"
+        },
+        {
+          "group": "内存规格",
+          "name": "内存通道数",
+          "unit": ""
+        },
+        {
+          "group": "互联规格",
+          "name": "PCIe通道数",
+          "unit": ""
+        },
+        {
+          "group": "互联规格",
+          "name": "UPI/IF带宽",
+          "unit": "GT/s"
+        },
+        {
+          "group": "物理规格",
+          "name": "代工厂",
+          "unit": ""
+        },
+        {
+          "group": "物理规格",
+          "name": "插槽类型",
+          "unit": ""
+        }
+      ]
+    },
+    "HBM": {
+      "required": [
+        {
+          "group": "性能规格",
+          "name": "单颗容量",
+          "unit": "GB"
+        },
+        {
+          "group": "性能规格",
+          "name": "带宽",
+          "unit": "TB/s"
+        },
+        {
+          "group": "性能规格",
+          "name": "堆叠层数",
+          "unit": "层"
+        },
+        {
+          "group": "性能规格",
+          "name": "I/O速率",
+          "unit": "Gbps"
+        }
+      ],
+      "optional": [
+        {
+          "group": "性能规格",
+          "name": "总线宽度",
+          "unit": "bit"
+        },
+        {
+          "group": "性能规格",
+          "name": "工作电压",
+          "unit": "V"
+        },
+        {
+          "group": "物理规格",
+          "name": "制程工艺",
+          "unit": "nm"
+        },
+        {
+          "group": "物理规格",
+          "name": "代工厂",
+          "unit": ""
+        },
+        {
+          "group": "物理规格",
+          "name": "封装方式",
+          "unit": ""
+        }
+      ]
+    },
+    "FPGA": {
+      "required": [
+        {
+          "group": "计算性能",
+          "name": "逻辑单元数",
+          "unit": ""
+        },
+        {
+          "group": "计算性能",
+          "name": "DSP数量",
+          "unit": ""
+        },
+        {
+          "group": "内存规格",
+          "name": "片上存储",
+          "unit": "Mb"
+        },
+        {
+          "group": "物理规格",
+          "name": "制程工艺",
+          "unit": "nm"
+        }
+      ],
+      "optional": [
+        {
+          "group": "计算性能",
+          "name": "INT8算力",
+          "unit": "TOPS"
+        },
+        {
+          "group": "内存规格",
+          "name": "HBM容量",
+          "unit": "GB"
+        },
+        {
+          "group": "内存规格",
+          "name": "DDR带宽",
+          "unit": "GB/s"
+        },
+        {
+          "group": "互联规格",
+          "name": "收发器速率",
+          "unit": "Gbps"
+        },
+        {
+          "group": "物理规格",
+          "name": "TDP功耗",
+          "unit": "W"
+        },
+        {
+          "group": "物理规格",
+          "name": "代工厂",
+          "unit": ""
+        }
+      ]
+    },
+    "DPU": {
+      "required": [
+        {
+          "group": "计算性能",
+          "name": "处理核心数",
+          "unit": ""
+        },
+        {
+          "group": "互联规格",
+          "name": "网络带宽",
+          "unit": "Gbps"
+        },
+        {
+          "group": "物理规格",
+          "name": "TDP功耗",
+          "unit": "W"
+        },
+        {
+          "group": "物理规格",
+          "name": "制程工艺",
+          "unit": "nm"
+        }
+      ],
+      "optional": [
+        {
+          "group": "内存规格",
+          "name": "内存容量",
+          "unit": "GB"
+        },
+        {
+          "group": "内存规格",
+          "name": "内存带宽",
+          "unit": "GB/s"
+        },
+        {
+          "group": "互联规格",
+          "name": "PCIe版本",
+          "unit": ""
+        },
+        {
+          "group": "互联规格",
+          "name": "加密加速",
+          "unit": "Gbps"
+        },
+        {
+          "group": "物理规格",
+          "name": "代工厂",
+          "unit": ""
+        }
+      ]
+    },
+    "oDSP": {
+      "required": [
+        {
+          "group": "性能规格",
+          "name": "单通道速率",
+          "unit": "Gbps"
+        },
+        {
+          "group": "性能规格",
+          "name": "支持速率",
+          "unit": ""
+        },
+        {
+          "group": "物理规格",
+          "name": "制程",
+          "unit": "nm"
+        }
+      ],
+      "optional": [
+        {
+          "group": "性能规格",
+          "name": "调制方式",
+          "unit": ""
+        },
+        {
+          "group": "性能规格",
+          "name": "通道数",
+          "unit": ""
+        },
+        {
+          "group": "性能规格",
+          "name": "传输介质",
+          "unit": ""
+        },
+        {
+          "group": "性能规格",
+          "name": "链路距离",
+          "unit": "m"
+        },
+        {
+          "group": "性能规格",
+          "name": "800G功耗",
+          "unit": "W"
+        },
+        {
+          "group": "性能规格",
+          "name": "1.6T功耗",
+          "unit": "W"
+        },
+        {
+          "group": "性能规格",
+          "name": "功耗降低",
+          "unit": "%"
+        },
+        {
+          "group": "物理规格",
+          "name": "代工厂",
+          "unit": ""
+        }
+      ]
+    }
+  }
+}
