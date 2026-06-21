@@ -46,6 +46,8 @@ export default class EntryAbility extends UIAbility {
 
       if (!tablesExist) {
         await this.executeSeedSql(store)
+        // 新装后也用rawfile全量覆盖，确保与内置数据库一致
+        await this.checkDbUpgrade(ctx)
       } else {
         // 版本升级检查
         await this.checkDbUpgrade(ctx)
