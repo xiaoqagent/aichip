@@ -88,8 +88,77 @@ export default class EntryAbility extends UIAbility {
     }
     hilog.info(0x0001, TAG, 'Tables created')
 
-    // 种子数据在 Phase 7 通过 update_ai_chip_db.py 生成的 SQL 批量插入
-    // Phase 1 仅验证表结构（为空是预期行为）
+    // Phase3: 插入种子数据（厂商 + 分类 + 测试芯片）
+    await this.insertSeedData(store)
+    hilog.info(0x0001, TAG, 'Seed data inserted')
+  }
+
+  private async insertSeedData(store: relationalStore.RdbStore): Promise<void> {
+    const now = Date.now()
+
+    // 厂商
+    const mfrs: Array<Array<string | number>> = [
+      [1, 'NVIDIA', '美国', 'https://www.nvidia.com', 1],
+      [2, 'AMD', '美国', 'https://www.amd.com', 2],
+      [3, 'Intel', '美国', 'https://www.intel.com', 3],
+      [4, '华为', '中国', 'https://www.huawei.com', 4],
+      [5, '寒武纪', '中国', 'https://www.cambricon.com', 5],
+      [6, 'Google', '美国', 'https://cloud.google.com/tpu', 15],
+      [7, 'SK海力士', '韩国', 'https://www.skhynix.com', 16],
+      [8, '三星', '韩国', 'https://www.samsung.com', 17],
+    ]
+    for (const m of mfrs) {
+      await store.executeSql(
+        'INSERT OR IGNORE INTO manufacturers (id,name,country,website,sort_order) VALUES (?,?,?,?,?)',
+        m.map(v => v.toString())
+      )
+    }
+
+    // 分类
+    const cats: Array<Array<string | number>> = [
+      [1, 'GPU', 'GPU', '图形处理器', 'icon_gpu', 1],
+      [2, 'NPU', 'NPU', '神经网络处理器', 'icon_npu', 2],
+      [3, 'CPU', 'CPU', '中央处理器', 'icon_cpu', 3],
+      [4, 'TPU', 'TPU', '张量处理器', 'icon_tpu', 4],
+      [5, 'HBM', 'HBM', '高带宽内存', 'icon_hbm', 5],
+      [6, 'FPGA', 'FPGA', '可编程门阵列', 'icon_fpga', 6],
+      [7, 'ASIC', 'ASIC', '专用集成电路', 'icon_asic', 7],
+      [8, 'DPU', 'DPU', '数据处理器', 'icon_dpu', 8],
+    ]
+    for (const c of cats) {
+      await store.executeSql(
+        'INSERT OR IGNORE INTO categories (id,code,name,description,icon_name,sort_order) VALUES (?,?,?,?,?,?)',
+        c.map(v => v.toString())
+      )
+    }
+
+    // 测试芯片
+    interface SeedChip {
+      n: string; m: string; mid: number; cid: number
+      arch: string; node: string; rel: string
+      key: string; kw: string; hot: number; nw: number
+    }
+    const chips: SeedChip[] = [
+      { n:'H100', m:'H100 SXM5', mid:1, cid:1, arch:'Hopper', node:'4nm', rel:'2022-03',
+        key:'{"显存":"80GB","FP16":"989 TFLOPS"}', kw:'H100,Hopper,80GB,NVIDIA', hot:1, nw:0 },
+      { n:'昇腾910B', m:'Ascend 910B', mid:4, cid:2, arch:'DaVinci', node:'7nm', rel:'2023-08',
+        key:'{"算力":"320 TFLOPS","TDP":"310W"}', kw:'910B,昇腾,Ascend,华为,NPU', hot:1, nw:0 },
+      { n:'MI300X', m:'Instinct MI300X', mid:2, cid:1, arch:'CDNA3', node:'5nm', rel:'2023-12',
+        key:'{"显存":"192GB","FP16":"1300 TFLOPS"}', kw:'MI300X,AMD,Instinct,192GB', hot:0, nw:1 },
+      { n:'B200', m:'B200 SXM', mid:1, cid:1, arch:'Blackwell', node:'4nm', rel:'2024-03',
+        key:'{"显存":"192GB","FP16":"2250 TFLOPS"}', kw:'B200,Blackwell,192GB,NVIDIA', hot:0, nw:1 },
+      { n:'HBM3e', m:'HBM3e 24GB', mid:7, cid:5, arch:'', node:'', rel:'2024-01',
+        key:'{"容量":"24GB","带宽":"1.2TB/s"}', kw:'HBM3e,SK海力士,HBM,24GB', hot:1, nw:1 },
+    ]
+    for (const c of chips) {
+      await store.executeSql(
+        `INSERT OR IGNORE INTO chips (name,model,manufacturer_id,category_id,architecture,process_node,
+         release_date,key_specs_json,search_keywords,is_hot,is_new,update_time,db_version)
+         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+        [c.n,c.m,c.mid.toString(),c.cid.toString(),c.arch,c.node,c.rel,c.key,c.kw,
+         c.hot.toString(),c.nw.toString(),now.toString(),'2']
+      )
+    }
   }
 
   private async checkDbUpgrade(ctx: Context): Promise<void> {
@@ -103,24 +172,26 @@ export default class EntryAbility extends UIAbility {
       const store = await RdbHelper.getStore(ctx)
       hilog.info(0x0001, TAG, 'Database ready')
 
-      // 验证表结构存在
       const catRs = await store.querySql("SELECT COUNT(*) as c FROM categories")
-      let catCount = 0
       if (catRs.goToFirstRow()) {
-        catCount = catRs.getLong(catRs.getColumnIndex('c'))
+        hilog.info(0x0001, TAG, `Categories: ${catRs.getLong(catRs.getColumnIndex('c'))}`)
       }
       catRs.close()
-      hilog.info(0x0001, TAG, `Categories table rows: ${catCount}`)
 
       const chipRs = await store.querySql("SELECT COUNT(*) as c FROM chips WHERE is_deleted = 0")
-      let chipCount = 0
       if (chipRs.goToFirstRow()) {
-        chipCount = chipRs.getLong(chipRs.getColumnIndex('c'))
+        hilog.info(0x0001, TAG, `Chips: ${chipRs.getLong(chipRs.getColumnIndex('c'))}`)
       }
       chipRs.close()
-      hilog.info(0x0001, TAG, `Chips table rows: ${chipCount}`)
 
-      hilog.info(0x0001, TAG, 'Phase 1 Integration Test PASSED')
+      // Phase3: 验证真实搜索
+      const r1 = await ChipDao.searchChips(ctx, '昇腾')
+      hilog.info(0x0001, TAG, `Search '昇腾': ${r1.length} results`)
+
+      const r2 = await ChipDao.searchChips(ctx, 'H100')
+      hilog.info(0x0001, TAG, `Search 'H100': ${r2.length} results`)
+
+      hilog.info(0x0001, TAG, 'Phase 3 Integration Test PASSED')
     } catch (e) {
       hilog.error(0x0001, TAG, `Integration Test FAILED: ${JSON.stringify(e)}`)
     }
