@@ -82,6 +82,7 @@ export default class EntryAbility extends UIAbility {
         FOREIGN KEY (manufacturer_id) REFERENCES manufacturers(id),
         FOREIGN KEY (category_id) REFERENCES categories(id)
       );
+      CREATE UNIQUE INDEX IF NOT EXISTS idx_chips_name_model ON chips(name, model);
       CREATE INDEX IF NOT EXISTS idx_chips_name ON chips(name);
       CREATE INDEX IF NOT EXISTS idx_chips_category ON chips(category_id);
       CREATE INDEX IF NOT EXISTS idx_chips_hot ON chips(is_hot);
@@ -132,31 +133,34 @@ export default class EntryAbility extends UIAbility {
       )
     }
 
-    // 测试芯片
+    // 清理已有重复 + 插入种子数据
+    await store.executeSql('DELETE FROM chips WHERE id NOT IN (SELECT MIN(id) FROM chips GROUP BY name, model)')
+
+    // 测试芯片（指定ID，保证 INSERT OR IGNORE 幂等）
     interface SeedChip {
-      n: string; m: string; mid: number; cid: number
+      id: number; n: string; m: string; mid: number; cid: number
       arch: string; node: string; rel: string
       key: string; kw: string; hot: number; nw: number
     }
     const chips: SeedChip[] = [
-      { n:'H100', m:'H100 SXM5', mid:1, cid:1, arch:'Hopper', node:'4nm', rel:'2022-03',
+      { id:1, n:'H100', m:'H100 SXM5', mid:1, cid:1, arch:'Hopper', node:'4nm', rel:'2022-03',
         key:'{"显存":"80GB","FP16":"989 TFLOPS"}', kw:'H100,Hopper,80GB,NVIDIA', hot:1, nw:0 },
-      { n:'昇腾910B', m:'Ascend 910B', mid:4, cid:2, arch:'DaVinci', node:'7nm', rel:'2023-08',
+      { id:2, n:'昇腾910B', m:'Ascend 910B', mid:4, cid:2, arch:'DaVinci', node:'7nm', rel:'2023-08',
         key:'{"算力":"320 TFLOPS","TDP":"310W"}', kw:'910B,昇腾,Ascend,华为,NPU', hot:1, nw:0 },
-      { n:'MI300X', m:'Instinct MI300X', mid:2, cid:1, arch:'CDNA3', node:'5nm', rel:'2023-12',
+      { id:3, n:'MI300X', m:'Instinct MI300X', mid:2, cid:1, arch:'CDNA3', node:'5nm', rel:'2023-12',
         key:'{"显存":"192GB","FP16":"1300 TFLOPS"}', kw:'MI300X,AMD,Instinct,192GB', hot:0, nw:1 },
-      { n:'B200', m:'B200 SXM', mid:1, cid:1, arch:'Blackwell', node:'4nm', rel:'2024-03',
+      { id:4, n:'B200', m:'B200 SXM', mid:1, cid:1, arch:'Blackwell', node:'4nm', rel:'2024-03',
         key:'{"显存":"192GB","FP16":"2250 TFLOPS"}', kw:'B200,Blackwell,192GB,NVIDIA', hot:0, nw:1 },
-      { n:'HBM3e', m:'HBM3e 24GB', mid:7, cid:5, arch:'', node:'', rel:'2024-01',
+      { id:5, n:'HBM3e', m:'HBM3e 24GB', mid:7, cid:5, arch:'', node:'', rel:'2024-01',
         key:'{"容量":"24GB","带宽":"1.2TB/s"}', kw:'HBM3e,SK海力士,HBM,24GB', hot:1, nw:1 },
     ]
     for (const c of chips) {
       await store.executeSql(
-        `INSERT OR IGNORE INTO chips (name,model,manufacturer_id,category_id,architecture,process_node,
+        `INSERT OR IGNORE INTO chips (id,name,model,manufacturer_id,category_id,architecture,process_node,
          release_date,key_specs_json,search_keywords,is_hot,is_new,update_time,db_version)
-         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`,
-        [c.n,c.m,c.mid.toString(),c.cid.toString(),c.arch,c.node,c.rel,c.key,c.kw,
-         c.hot.toString(),c.nw.toString(),now.toString(),'2']
+         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+        [c.id.toString(),c.n,c.m,c.mid.toString(),c.cid.toString(),c.arch,c.node,c.rel,
+         c.key,c.kw,c.hot.toString(),c.nw.toString(),now.toString(),'2']
       )
     }
   }
