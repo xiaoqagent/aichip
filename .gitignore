@@ -1,0 +1,27 @@
+# 签名文件
+*.p12
+*.p7b
+*.csr
+*.cer
+*.jks
+*.keystore
+
+# 构建产物
+build/
+.hvigor/
+node_modules/
+
+# 密码配置
+build-profile.json5
+
+# IDE
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 临时
+*.tmp
+*.log

@@ -1,0 +1,11 @@
+{
+  "modelVersion": "5.0.0",
+  "name": "aichip",
+  "version": "1.0.0",
+  "description": "AI芯片查询对比APP",
+  "main": "",
+  "author": "xiaoq",
+  "license": "",
+  "dependencies": {},
+  "devDependencies": {}
+}

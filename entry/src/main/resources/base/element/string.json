@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "AI芯片查询对比APP"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "AI芯片"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "AI芯片"
+    }
+  ]
+}
