@@ -8,12 +8,22 @@ import { router } from '@kit.ArkUI'
 
 const TAG = 'AIChip'
 
+type SortMode = 'default' | 'date' | 'hot'
+interface MfrItem {
+  id: number
+  name: string
+}
+
 @Component
 export struct CategoryPage {
   @State categories: CategoryModel[] = []
-  @State chips: ChipModel[] = []
+  @State allChips: ChipModel[] = []
+  @State filteredChips: ChipModel[] = []
   @State selectedCategory: CategoryModel | null = null
   @State isLoading: boolean = true
+  @State sortMode: SortMode = 'default'
+  @State filterMfrId: number = 0 // 0=全部
+  private chipCache: Map<string, ChipModel[]> = new Map()
   private context: Context = getContext()
 
   aboutToAppear() {
@@ -21,7 +31,6 @@ export struct CategoryPage {
   }
 
   async loadCategories() {
-    this.isLoading = true
     try {
       this.categories = await CategoryDao.getAll(this.context)
       hilog.info(0x0001, TAG, `Categories loaded: ${this.categories.length}`)
@@ -34,21 +43,83 @@ export struct CategoryPage {
 
   async onCategoryTap(cat: CategoryModel) {
     this.selectedCategory = cat
-    this.isLoading = true
-    try {
-      this.chips = await ChipDao.getByCategory(this.context, cat.code)
-      hilog.info(0x0001, TAG, `Category '${cat.code}': ${this.chips.length} chips`)
-    } catch (e) {
-      hilog.error(0x0001, TAG, `Load chips failed: ${JSON.stringify(e)}`)
-      this.chips = []
-    } finally {
-      this.isLoading = false
+    this.sortMode = 'default'
+    this.filterMfrId = 0
+
+    // 缓存：同一个分类不重复查DB
+    if (this.chipCache.has(cat.code)) {
+      this.allChips = this.chipCache.get(cat.code)!
+      hilog.info(0x0001, TAG, `Category '${cat.code}': cache hit, ${this.allChips.length} chips`)
+    } else {
+      this.isLoading = true
+      try {
+        this.allChips = await ChipDao.getByCategory(this.context, cat.code)
+        this.chipCache.set(cat.code, this.allChips)
+        hilog.info(0x0001, TAG, `Category '${cat.code}': DB loaded, ${this.allChips.length} chips`)
+      } catch (e) {
+        hilog.error(0x0001, TAG, `Load chips failed: ${JSON.stringify(e)}`)
+        this.allChips = []
+      } finally {
+        this.isLoading = false
+      }
     }
+    this.applyFilterAndSort()
+  }
+
+  applyFilterAndSort() {
+    let list = [...this.allChips]
+
+    // 厂商筛选
+    if (this.filterMfrId > 0) {
+      list = list.filter(c => c.manufacturer_id === this.filterMfrId)
+    }
+
+    // 排序
+    if (this.sortMode === 'date') {
+      list.sort((a, b) => b.release_date.localeCompare(a.release_date))
+    } else if (this.sortMode === 'hot') {
+      list.sort((a, b) => b.is_hot - a.is_hot)
+    }
+
+    this.filteredChips = list
+  }
+
+  onSortChange(mode: SortMode) {
+    this.sortMode = mode
+    this.applyFilterAndSort()
+  }
+
+  onMfrFilter(mfrId: number) {
+    this.filterMfrId = mfrId
+    this.applyFilterAndSort()
+  }
+
+  getMfrName(mfrId: number): string {
+    // 简单映射（后续可从DB加载）
+    const info: Record<number, string> = {
+      1: 'NVIDIA', 2: 'AMD', 3: 'Intel', 4: '华为', 5: '寒武纪',
+      6: 'Google', 7: 'SK海力士', 8: '三星'
+    }
+    return info[mfrId] || '未知'
+  }
+
+  getDistinctMfrs(): MfrItem[] {
+    const seen = new Set<number>()
+    const result: MfrItem[] = []
+    for (const c of this.allChips) {
+      if (!seen.has(c.manufacturer_id)) {
+        seen.add(c.manufacturer_id)
+        const item: MfrItem = { id: c.manufacturer_id, name: this.getMfrName(c.manufacturer_id) }
+        result.push(item)
+      }
+    }
+    return result
   }
 
   onBack() {
     this.selectedCategory = null
-    this.chips = []
+    this.allChips = []
+    this.filteredChips = []
   }
 
   onChipClick(chip: ChipModel) {
@@ -60,45 +131,88 @@ export struct CategoryPage {
 
   build() {
     if (this.selectedCategory) {
-      // 子页面：显示分类下的芯片列表
       this.ChipListView()
     } else {
-      // 主界面：分类Grid
       this.CategoryGridView()
     }
   }
 
   @Builder ChipListView() {
     Column() {
-      // 标题栏
+      // 标题栏 + 返回按钮
       Row() {
-        Image($r('sys.symbol.chevron_left'))
-          .width(24).height(24).fillColor('#1A73E8')
+        Text('← 返回')
+          .fontSize(14).fontColor('#1A73E8')
           .onClick(() => { this.onBack() })
         Text(this.selectedCategory!.name)
           .fontSize(20).fontWeight(FontWeight.Bold).fontColor('#1A1A1A')
           .layoutWeight(1).margin({ left: 8 })
-        Text(`${this.chips.length}款`)
+        Text(`${this.filteredChips.length}款`)
           .fontSize(14).fontColor('#999')
       }
       .width('100%')
       .padding({ left: 16, right: 16, top: 16, bottom: 8 })
       .backgroundColor('#FFFFFF')
 
+      // 筛选+排序栏
+      Row() {
+        // 厂商筛选
+        Row() {
+          Text('厂商')
+            .fontSize(13).fontColor('#666')
+          ForEach(this.getDistinctMfrs(), (mfr: MfrItem) => {
+            Text(mfr.name)
+              .fontSize(12)
+              .fontColor(this.filterMfrId === mfr.id ? '#FFFFFF' : '#666')
+              .backgroundColor(this.filterMfrId === mfr.id ? '#1A73E8' : '#F0F0F0')
+              .borderRadius(12)
+              .padding({ left: 8, right: 8, top: 3, bottom: 3 })
+              .margin({ left: 4 })
+              .onClick(() => {
+                this.onMfrFilter(this.filterMfrId === mfr.id ? 0 : mfr.id)
+              })
+          })
+        }
+        .layoutWeight(1)
+
+        // 排序
+        Row() {
+          Text(this.sortMode === 'default' ? '✓ 默认' : '默认')
+            .fontSize(12)
+            .fontColor(this.sortMode === 'default' ? '#1A73E8' : '#999')
+            .margin({ left: 12 })
+            .onClick(() => { this.onSortChange('default') })
+          Text(this.sortMode === 'date' ? '✓ 日期' : '日期')
+            .fontSize(12)
+            .fontColor(this.sortMode === 'date' ? '#1A73E8' : '#999')
+            .margin({ left: 12 })
+            .onClick(() => { this.onSortChange('date') })
+          Text(this.sortMode === 'hot' ? '✓ 热度' : '热度')
+            .fontSize(12)
+            .fontColor(this.sortMode === 'hot' ? '#1A73E8' : '#999')
+            .margin({ left: 12 })
+            .onClick(() => { this.onSortChange('hot') })
+        }
+      }
+      .width('100%')
+      .padding({ left: 16, right: 16, top: 8, bottom: 8 })
+      .backgroundColor('#FFFFFF')
+
+      // 芯片列表
       if (this.isLoading) {
         LoadingProgress()
           .width(24).height(24).margin({ top: 60 })
-      } else if (this.chips.length === 0) {
+      } else if (this.filteredChips.length === 0) {
         Column() {
           Image($r('app.media.app_icon'))
             .width(80).height(80).opacity(0.3)
-          Text('暂无此分类的芯片数据')
+          Text('暂无匹配的芯片')
             .fontSize(15).fontColor('#BFBFBF').margin({ top: 16 })
         }
         .width('100%').layoutWeight(1).justifyContent(FlexAlign.Center)
       } else {
         List() {
-          ForEach(this.chips, (chip: ChipModel, index: number) => {
+          ForEach(this.filteredChips, (chip: ChipModel, index: number) => {
             ListItem() {
               ChipCard({ chip: chip })
                 .margin({ left: 16, right: 16, top: 4, bottom: 4 })
@@ -133,7 +247,7 @@ export struct CategoryPage {
                 Text(cat.description)
                   .fontSize(12).fontColor('#999').margin({ top: 4 })
                   .maxLines(2).textOverflow({ overflow: TextOverflow.Ellipsis })
-                Text(`${this.getChipCountHint(cat.code)}`)
+                Text('点击查看')
                   .fontSize(11).fontColor('#BFBFBF').margin({ top: 6 })
               }
               .width('100%')
@@ -153,20 +267,5 @@ export struct CategoryPage {
     }
     .width('100%').height('100%')
     .backgroundColor('#F5F6FA')
-  }
-
-  getChipCountHint(code: string): string {
-    // 静态映射提示（实际数量在点击后由DB返回）
-    const info: Record<string, string> = {
-      'GPU': '点击查看GPU芯片',
-      'NPU': '点击查看NPU芯片',
-      'CPU': '点击查看CPU芯片',
-      'TPU': '点击查看TPU芯片',
-      'HBM': '点击查看HBM芯片',
-      'FPGA': '点击查看FPGA芯片',
-      'ASIC': '点击查看ASIC芯片',
-      'DPU': '点击查看DPU芯片',
-    }
-    return info[code] || '点击查看'
   }
 }
