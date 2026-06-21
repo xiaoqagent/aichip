@@ -15,11 +15,11 @@ interface TabItem {
 struct Index {
   @State currentIndex: number = 0
   private tabItems: TabItem[] = [
-    { title: '查询', icon: $r('app.media.app_icon') },
-    { title: '分类', icon: $r('app.media.app_icon') },
-    { title: '对比', icon: $r('app.media.app_icon') },
-    { title: '集群', icon: $r('app.media.app_icon') },
-    { title: '我的', icon: $r('app.media.app_icon') }
+    { title: '查询', icon: $r('app.media.tab_search') },
+    { title: '分类', icon: $r('app.media.tab_category') },
+    { title: '对比', icon: $r('app.media.tab_compare') },
+    { title: '集群', icon: $r('app.media.tab_cluster') },
+    { title: '我的', icon: $r('app.media.tab_mine') }
   ]
 
   @Builder TabContent(index: number) {
