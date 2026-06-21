@@ -164,9 +164,52 @@ export default class EntryAbility extends UIAbility {
   }
 
   private async checkDbUpgrade(ctx: Context): Promise<void> {
-    // 版本升级：读取 rawfile 中的 init_db.db 版本，比对本地的
-    // Phase 1: 无数据无需升级，Phase 7 后再启用
-    hilog.info(0x0001, TAG, `DB version: v${AppConstants.DB_VERSION}`)
+    const rawVersion = AppConstants.DB_VERSION
+    let sandboxVersion = 0
+
+    try {
+      const store = await RdbHelper.getStore(ctx)
+      const rs = await store.querySql('SELECT COALESCE(MAX(db_version), 0) as v FROM chips')
+      if (rs.goToFirstRow()) {
+        sandboxVersion = rs.getLong(rs.getColumnIndex('v'))
+      }
+      rs.close()
+    } catch (e) {
+      sandboxVersion = 0
+    }
+
+    hilog.info(0x0001, TAG, `DB: sandbox v${sandboxVersion}, rawfile v${rawVersion}`)
+
+    if (sandboxVersion >= rawVersion) {
+      hilog.info(0x0001, TAG, `DB up to date: v${sandboxVersion}`)
+      return
+    }
+
+    hilog.info(0x0001, TAG, `DB upgrade: sandbox v${sandboxVersion} → rawfile v${rawVersion}`)
+
+    // 关闭旧连接
+    RdbHelper.close()
+
+    // 从 rawfile 读取字节（不能用 fileIo，rawfile 是打包资源不是真实文件路径）
+    const resMgr = ctx.resourceManager
+    let rawBytes: Uint8Array = new Uint8Array(0)
+    try {
+      rawBytes = resMgr.getRawFileContentSync(AppConstants.RAW_DB_PATH)
+    } catch (e) {
+      hilog.error(0x0001, TAG, `Rawfile read failed: ${JSON.stringify(e)}`)
+      return
+    }
+
+    // 写入沙箱数据库路径
+    const dbPath = ctx.databaseDir + '/rdb/' + AppConstants.DB_NAME
+    try {
+      const file = fs.openSync(dbPath, fs.OpenMode.CREATE | fs.OpenMode.WRITE_ONLY | fs.OpenMode.TRUNC)
+      fs.writeSync(file.fd, rawBytes.buffer as ArrayBuffer)
+      fs.closeSync(file)
+      hilog.info(0x0001, TAG, `DB upgrade complete: ${rawBytes.length} bytes`)
+    } catch (e) {
+      hilog.error(0x0001, TAG, `DB write failed: ${JSON.stringify(e)}`)
+    }
   }
 
   private async runIntegrationTest(ctx: Context): Promise<void> {
