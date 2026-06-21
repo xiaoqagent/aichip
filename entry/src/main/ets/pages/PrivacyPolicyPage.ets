@@ -43,7 +43,7 @@ struct PrivacyPolicyPage {
             .fontSize(16).fontWeight(FontWeight.Bold).fontColor('#1A1A1A').margin({ bottom: 8 })
           Text('如有任何隐私相关疑问，请联系：')
             .fontSize(14).fontColor('#555').lineHeight(22).margin({ bottom: 8 })
-          Text('邮箱：xiaoq@xiao-q.com')
+          Text('邮箱：592499073@qq.com')
             .fontSize(14).fontColor('#1A73E8').lineHeight(22).margin({ bottom: 32 })
         }
         .width('100%')
