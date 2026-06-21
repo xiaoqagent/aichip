@@ -206,13 +206,13 @@ export default class EntryAbility extends UIAbility {
       return
     }
 
-    // 写入沙箱数据库路径
-    const dbPath = ctx.databaseDir + '/rdb/' + AppConstants.DB_NAME
+    // 写入沙箱数据库路径（必须与RdbStore内部路径一致）
+    const dbPath = ctx.databaseDir + '/aichip.xiaoq.profile/entry/rdb/' + AppConstants.DB_NAME
     try {
       const file = fs.openSync(dbPath, fs.OpenMode.CREATE | fs.OpenMode.WRITE_ONLY | fs.OpenMode.TRUNC)
       fs.writeSync(file.fd, rawBytes.buffer as ArrayBuffer)
       fs.closeSync(file)
-      hilog.info(0x0001, TAG, `DB upgrade complete: ${rawBytes.length} bytes`)
+      hilog.info(0x0001, TAG, `DB upgrade complete: ${rawBytes.length} bytes → ${dbPath}`)
     } catch (e) {
       hilog.error(0x0001, TAG, `DB write failed: ${JSON.stringify(e)}`)
     }
