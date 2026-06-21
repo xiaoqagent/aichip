@@ -156,7 +156,7 @@ export default class EntryAbility extends UIAbility {
     ]
     for (const c of chips) {
       await store.executeSql(
-        `INSERT OR IGNORE INTO chips (id,name,model,manufacturer_id,category_id,architecture,process_node,
+        `INSERT OR REPLACE INTO chips (id,name,model,manufacturer_id,category_id,architecture,process_node,
          release_date,key_specs_json,search_keywords,is_hot,is_new,update_time,db_version)
          VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
         [c.id.toString(),c.n,c.m,c.mid.toString(),c.cid.toString(),c.arch,c.node,c.rel,
