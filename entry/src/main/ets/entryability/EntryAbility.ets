@@ -18,25 +18,65 @@ export default class EntryAbility extends UIAbility {
   private async initApp(): Promise<void> {
     const ctx = this.context
 
-    // 首次安装：从rawfile原子复制数据库到沙箱
-    const dbPath = ctx.filesDir + '/databases/' + AppConstants.DB_NAME
+    // 首次安装 + 版本升级：从rawfile原子复制数据库到沙箱
+    await this.initDatabase(ctx)
+
+    // 集成测试
+    await this.runIntegrationTest(ctx)
+  }
+
+  private async initDatabase(ctx: Context): Promise<void> {
+    const dirPath = ctx.filesDir + '/databases'
+    const dbPath = dirPath + '/' + AppConstants.DB_NAME
+    const tmpPath = dirPath + '/init_db.tmp'
+
+    // 确保目录存在
+    if (!fs.accessSync(dirPath)) {
+      fs.mkdirSync(dirPath, true)
+    }
+
+    const rawBytes: Uint8Array = await ctx.resourceManager.getRawFileContent(AppConstants.RAW_DB_PATH)
+
+    // 首次安装：直接复制
     if (!fs.accessSync(dbPath)) {
-      hilog.info(0x0001, TAG, 'First install, copying database from rawfile')
-      const dirPath = ctx.filesDir + '/databases'
-      if (!fs.accessSync(dirPath)) {
-        fs.mkdirSync(dirPath, true)
-      }
-      const tmpPath = dirPath + '/init_db.tmp'
-      const rawBytes: Uint8Array = await ctx.resourceManager.getRawFileContent(AppConstants.RAW_DB_PATH)
+      hilog.info(0x0001, TAG, 'First install, copying database')
       const file = fs.openSync(tmpPath, fs.OpenMode.CREATE | fs.OpenMode.WRITE_ONLY)
       fs.writeSync(file.fd, rawBytes.buffer as ArrayBuffer)
       fs.closeSync(file)
       fs.renameSync(tmpPath, dbPath)
       hilog.info(0x0001, TAG, 'Database initialized')
+      return
     }
 
-    // Phase 1 集成测试
-    await this.runIntegrationTest(ctx)
+    // 版本升级检查：比对内置DB版本和沙箱DB版本
+    const store = await RdbHelper.getStore(ctx)
+    let sandboxVersion = 1
+    try {
+      const rs = await store.querySql('SELECT MAX(db_version) as v FROM chips')
+      if (rs.goToFirstRow()) {
+        sandboxVersion = rs.getLong(rs.getColumnIndex('v'))
+      }
+      rs.close()
+    } catch (e) {
+      hilog.warn(0x0001, TAG, 'Version read failed, assuming v1')
+    }
+
+    if (AppConstants.DB_VERSION > sandboxVersion) {
+      hilog.info(0x0001, TAG, `DB upgrade: sandbox v${sandboxVersion} → rawfile v${AppConstants.DB_VERSION}`)
+      await store.close()
+      RdbHelper.close()
+
+      // 原子覆盖
+      const file = fs.openSync(tmpPath, fs.OpenMode.CREATE | fs.OpenMode.WRITE_ONLY)
+      fs.writeSync(file.fd, rawBytes.buffer as ArrayBuffer)
+      fs.closeSync(file)
+      fs.renameSync(tmpPath, dbPath)
+
+      await RdbHelper.getStore(ctx)
+      hilog.info(0x0001, TAG, 'DB upgrade complete')
+    } else {
+      hilog.info(0x0001, TAG, `DB up to date: v${sandboxVersion}`)
+    }
   }
 
   private async runIntegrationTest(ctx: Context): Promise<void> {
