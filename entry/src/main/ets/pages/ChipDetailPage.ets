@@ -28,9 +28,7 @@ struct ChipDetailPage {
   async loadChip() {
     try {
       this.chip = await ChipDao.getById(this.context, this.chipId)
-      if (this.chip) {
-        this.parseSpecs(this.chip.detail_specs_json)
-      }
+      if (this.chip) this.parseSpecs(this.chip.detail_specs_json)
     } catch (e) {
       hilog.error(0x0001, TAG, `Load failed: ${JSON.stringify(e)}`)
     } finally {
@@ -46,7 +44,7 @@ struct ChipDetailPage {
         if (!groups.has(s.group)) groups.set(s.group, [])
         groups.get(s.group)!.push(s)
       }
-    } catch (e) { /* empty */ }
+    } catch (e) { /* ignore malformed json */ }
     this.specGroups = []
     groups.forEach((items, group) => {
       const sg: SpecGroup = { group, items }
@@ -64,96 +62,95 @@ struct ChipDetailPage {
 
   build() {
     Column() {
-      this.HeaderBar()
+      // 标题栏
+      Row() {
+        Text('← 返回').fontSize(14).fontColor('#1A73E8')
+          .onClick(() => { router.back() })
+        Blank()
+        Text('').width(48)
+      }
+      .width('100%').padding({ left: 16, right: 16, top: 12, bottom: 12 })
+      .backgroundColor('#FFFFFF')
+
       if (this.isLoading) {
         LoadingProgress().width(24).height(24).margin({ top: 60 })
       } else if (!this.chip) {
         Text('加载失败').fontSize(15).fontColor('#999').margin({ top: 60 })
       } else {
-        Scroll() { this.DetailContent() }.layoutWeight(1)
+        Scroll() {
+          Column() {
+            // ===== 芯片名称头部 =====
+            Column() {
+              Text(this.chip!.name)
+                .fontSize(32).fontWeight(FontWeight.Bold).fontColor('#1A1A1A')
+              Text(this.chip!.model)
+                .fontSize(15).fontColor('#666').margin({ top: 4 })
+              Text(this.chip!.description)
+                .fontSize(13).fontColor('#999').margin({ top: 8 })
+            }
+            .width('100%').alignItems(HorizontalAlign.Start)
+            .padding(20).backgroundColor('#FFFFFF')
+
+            // ===== 基本信息（列表式） =====
+            Column() {
+              this.InfoRow('厂商', this.getMfrName(this.chip!.manufacturer_id), 0)
+              if (this.chip!.architecture) this.InfoRow('架构', this.chip!.architecture, 1)
+              if (this.chip!.process_node) this.InfoRow('制程', this.chip!.process_node, 2)
+              if (this.chip!.release_date) this.InfoRow('发布时间', this.chip!.release_date, 3)
+            }
+            .width('100%').backgroundColor('#FFFFFF')
+            .padding({ left: 20, right: 20, bottom: 8 })
+
+            // 分隔线
+            Divider().color('#F0F0F0').strokeWidth(8)
+
+            // ===== 参数分组 =====
+            ForEach(this.specGroups, (sg: SpecGroup) => {
+              Column() {
+                // 分组标题
+                Text(sg.group)
+                  .fontSize(16).fontWeight(FontWeight.Medium).fontColor('#1A73E8')
+                  .width('100%')
+                  .padding({ left: 20, right: 20, top: 16, bottom: 10 })
+                  .backgroundColor('#FFFFFF')
+
+                // 参数行
+                ForEach(sg.items, (item: SpecItem, idx: number) => {
+                  Row() {
+                    Text(item.name)
+                      .fontSize(15).fontColor('#333')
+                    Blank()
+                    Text(item.value + (item.unit ? ' ' + item.unit : ''))
+                      .fontSize(15).fontWeight(FontWeight.Medium).fontColor('#1A1A1A')
+                  }
+                  .width('100%')
+                  .backgroundColor(idx % 2 === 0 ? '#FAFBFC' : '#FFFFFF')
+                  .padding({ left: 28, right: 20, top: 12, bottom: 12 })
+                })
+
+                Divider().color('#F0F0F0').strokeWidth(8)
+              }
+              .width('100%')
+            })
+          }
+        }
+        .layoutWeight(1)
+        .scrollBar(BarState.Off)
       }
     }
     .width('100%').height('100%').backgroundColor('#F5F6FA')
   }
 
-  @Builder HeaderBar() {
+  @Builder InfoRow(label: string, value: string, idx: number) {
     Row() {
-      Text('← 返回').fontSize(14).fontColor('#1A73E8')
-        .onClick(() => { router.back() })
-      Text(this.chip?.name || '芯片详情')
-        .fontSize(20).fontWeight(FontWeight.Bold).fontColor('#1A1A1A')
-        .layoutWeight(1).textAlign(TextAlign.Center)
-      Text('').width(48)
+      Text(label)
+        .fontSize(15).fontColor('#333')
+      Blank()
+      Text(value)
+        .fontSize(15).fontWeight(FontWeight.Medium).fontColor('#1A1A1A')
     }
-    .width('100%').padding(16).backgroundColor('#FFFFFF')
-  }
-
-  @Builder DetailContent() {
-    Column() {
-      // ===== 芯片头部 =====
-      Column() {
-        Text(this.chip!.name)
-          .fontSize(32).fontWeight(FontWeight.Bold).fontColor('#1A1A1A')
-        Text(this.chip!.model)
-          .fontSize(16).fontColor('#666').margin({ top: 6 })
-        Text(this.chip!.description)
-          .fontSize(14).fontColor('#999').margin({ top: 8 })
-
-        // 属性标签
-        Row() {
-          this.Tag('厂商', this.getMfrName(this.chip!.manufacturer_id))
-          if (this.chip!.architecture) this.Tag('架构', this.chip!.architecture)
-          if (this.chip!.process_node) this.Tag('制程', this.chip!.process_node)
-          if (this.chip!.release_date) this.Tag('发布', this.chip!.release_date)
-        }
-        .width('100%').margin({ top: 16 })
-      }
-      .width('100%').padding(20).backgroundColor('#FFFFFF')
-
-      // ===== 参数列表 =====
-      ForEach(this.specGroups, (sg: SpecGroup) => {
-        Column() {
-          // 分组标题
-          Row() {
-            Text(sg.group)
-              .fontSize(16).fontWeight(FontWeight.Medium).fontColor('#1A73E8')
-          }
-          .width('100%')
-          .padding({ left: 20, right: 20, top: 16, bottom: 8 })
-          .backgroundColor('#FFFFFF')
-
-          // 参数行（交替背景色）
-          ForEach(sg.items, (item: SpecItem, idx: number) => {
-            Row() {
-              Text(item.name)
-                .fontSize(14).fontColor('#666')
-                .layoutWeight(1)
-              Text(item.value + (item.unit ? ' ' + item.unit : ''))
-                .fontSize(14).fontWeight(FontWeight.Medium).fontColor('#1A1A1A')
-            }
-            .width('100%')
-            .padding({ left: 20, right: 20, top: 10, bottom: 10 })
-            .backgroundColor(idx % 2 === 0 ? '#FAFBFC' : '#FFFFFF')
-          })
-
-          // 底部间隙
-          Divider().color('#F0F0F0').strokeWidth(8)
-        }
-        .width('100%')
-      })
-
-      // 底部留白
-      Column().width('100%').height(24)
-    }
-  }
-
-  @Builder Tag(label: string, value: string) {
-    Row() {
-      Text(label).fontSize(11).fontColor('#999')
-      Text(value).fontSize(11).fontColor('#333').margin({ left: 4 })
-    }
-    .padding({ left: 8, right: 10, top: 4, bottom: 4 })
-    .backgroundColor('#F5F6FA').borderRadius(4)
-    .margin({ right: 8, top: 6 })
+    .width('100%')
+    .backgroundColor(idx % 2 === 0 ? '#FAFBFC' : '#FFFFFF')
+    .padding({ left: 20, right: 20, top: 12, bottom: 12 })
   }
 }
