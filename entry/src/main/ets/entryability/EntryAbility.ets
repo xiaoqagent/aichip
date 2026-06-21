@@ -2,7 +2,7 @@ import { UIAbility } from '@kit.AbilityKit'
 import { window } from '@kit.ArkUI'
 import { hilog } from '@kit.PerformanceAnalysisKit'
 import { relationalStore } from '@kit.ArkData'
-import { fileIo as fs } from '@kit.CoreFileKit'
+import { util } from '@kit.ArkTS'
 import { RdbHelper } from '../database/RdbHelper'
 import { ChipDao } from '../dao/ChipDao'
 import { AppConstants } from '../constants/AppConstants'
@@ -25,98 +25,94 @@ export default class EntryAbility extends UIAbility {
 
   private async initDatabase(ctx: Context): Promise<void> {
     try {
-      // 🔧 修复2: 直接用 rawfile 覆盖，不建空表不写种子
-      await this.upgradeFromRawfile(ctx)
+      const store = await RdbHelper.getStore(ctx)
+
+      // 检查是否需要初始化
+      let needInit = true
+      try {
+        const rs = await store.querySql("SELECT COALESCE(MAX(db_version), 0) as v FROM chips")
+        if (rs.goToFirstRow()) {
+          const v = rs.getLong(rs.getColumnIndex('v'))
+          needInit = v < AppConstants.DB_VERSION
+          hilog.info(0x0001, TAG, `DB v${v}, needInit=${needInit}`)
+        }
+        rs.close()
+      } catch (e) {
+        hilog.info(0x0001, TAG, 'Tables missing, full init needed')
+      }
+
+      if (needInit) {
+        await this.fullInit(ctx, store)
+      }
     } catch (e) {
       hilog.error(0x0001, TAG, `DB init failed: ${JSON.stringify(e)}`)
     }
   }
 
-  private async upgradeFromRawfile(ctx: Context): Promise<void> {
-    // 读 rawfile
-    const resMgr = ctx.resourceManager
-    let rawBytes: Uint8Array = new Uint8Array(0)
-    try {
-      rawBytes = resMgr.getRawFileContentSync(AppConstants.RAW_DB_PATH)
-      hilog.info(0x0001, TAG, `Rawfile: ${rawBytes.length} bytes`)
-    } catch (e) {
-      hilog.error(0x0001, TAG, `Rawfile read failed: ${JSON.stringify(e)}`)
-      return
+  private async fullInit(ctx: Context, store: relationalStore.RdbStore): Promise<void> {
+    hilog.info(0x0001, TAG, 'Full DB init from seed_data.json')
+
+    // 读 JSON 种子数据
+    const raw = ctx.resourceManager.getRawFileContentSync('seed_data.json')
+    const text = new util.TextDecoder('utf-8').decodeWithStream(raw, { stream: false })
+    const seed = JSON.parse(text) as Record<string, Object>
+
+    // CREATE TABLE（幂等）
+    await store.executeSql(`CREATE TABLE IF NOT EXISTS manufacturers (
+      id INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE,
+      country TEXT, website TEXT, sort_order INTEGER DEFAULT 0)`)
+    await store.executeSql(`CREATE TABLE IF NOT EXISTS categories (
+      id INTEGER PRIMARY KEY, code TEXT NOT NULL UNIQUE,
+      name TEXT NOT NULL, description TEXT, icon_name TEXT, sort_order INTEGER DEFAULT 0)`)
+    await store.executeSql(`CREATE TABLE IF NOT EXISTS chips (
+      id INTEGER PRIMARY KEY, name TEXT NOT NULL, model TEXT,
+      manufacturer_id INTEGER NOT NULL, category_id INTEGER NOT NULL,
+      architecture TEXT, process_node TEXT, release_date TEXT,
+      key_specs_json TEXT, detail_specs_json TEXT, description TEXT,
+      image_path TEXT, search_keywords TEXT,
+      is_hot INTEGER DEFAULT 0, is_new INTEGER DEFAULT 0, is_deleted INTEGER DEFAULT 0,
+      update_time INTEGER, db_version INTEGER DEFAULT 1)`)
+    await store.executeSql('CREATE UNIQUE INDEX IF NOT EXISTS idx_chips_name_model ON chips(name, model)')
+    await store.executeSql('CREATE INDEX IF NOT EXISTS idx_chips_category ON chips(category_id)')
+
+    // INSERT 厂商
+    const mfrs = seed['manufacturers'] as Array<Record<string, Object>>
+    for (const m of mfrs) {
+      await store.executeSql(
+        'INSERT OR REPLACE INTO manufacturers (id,name,country,website,sort_order) VALUES (?,?,?,?,?)',
+        [m['id'] as number, m['name'] as string, m['country'] as string, m['website'] as string, m['sort_order'] as number]
+      )
     }
 
-    // 检查是否需要升级
-    let needUpgrade = true
-    try {
-      const store = await RdbHelper.getStore(ctx)
-      try {
-        const rs = await store.querySql('SELECT COALESCE(MAX(db_version), 0) as v FROM chips')
-        if (rs.goToFirstRow()) {
-          const v = rs.getLong(rs.getColumnIndex('v'))
-          if (v >= AppConstants.DB_VERSION) {
-            needUpgrade = false
-            hilog.info(0x0001, TAG, `DB up to date: v${v}`)
-          } else {
-            hilog.info(0x0001, TAG, `DB upgrade needed: sandbox v${v} → rawfile v${AppConstants.DB_VERSION}`)
-          }
-        }
-        rs.close()
-      } catch (e) {
-        // 表不存在，需要升级
-        hilog.info(0x0001, TAG, 'Tables missing, upgrade needed')
-      }
-    } catch (e) {
-      hilog.info(0x0001, TAG, 'Store not ready, upgrade needed')
+    // INSERT 分类
+    const cats = seed['categories'] as Array<Record<string, Object>>
+    for (const c of cats) {
+      await store.executeSql(
+        'INSERT OR REPLACE INTO categories (id,code,name,description,icon_name,sort_order) VALUES (?,?,?,?,?,?)',
+        [c['id'] as number, c['code'] as string, c['name'] as string,
+         c['description'] as string, c['icon_name'] as string, c['sort_order'] as number]
+      )
     }
 
-    if (!needUpgrade) {
-      return
+    // INSERT 芯片
+    const chips = seed['chips'] as Array<Record<string, Object>>
+    for (const ch of chips) {
+      await store.executeSql(
+        `INSERT OR REPLACE INTO chips (id,name,model,manufacturer_id,category_id,architecture,process_node,
+         release_date,key_specs_json,detail_specs_json,description,image_path,search_keywords,
+         is_hot,is_new,is_deleted,update_time,db_version)
+         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+        [ch['id'] as number, ch['name'] as string, ch['model'] as string,
+         ch['manufacturer_id'] as number, ch['category_id'] as number,
+         ch['architecture'] as string, ch['process_node'] as string, ch['release_date'] as string,
+         ch['key_specs_json'] as string, ch['detail_specs_json'] as string,
+         ch['description'] as string, ch['image_path'] as string, ch['search_keywords'] as string,
+         ch['is_hot'] as number, ch['is_new'] as number, ch['is_deleted'] as number,
+         ch['update_time'] as number, ch['db_version'] as number]
+      )
     }
 
-    // 关闭旧 store
-    RdbHelper.close()
-
-    // 删旧库（ctx.databaseDir 已含 bundleName）
-    try {
-      await relationalStore.deleteRdbStore(ctx, AppConstants.DB_NAME)
-    } catch (e) {
-      // 首次安装时不存在
-    }
-
-    // 🔧 修复3: ctx.databaseDir 已经包含 bundleName，不用再加
-    const rdbDir = ctx.databaseDir + '/entry/rdb'
-    const dbPath = rdbDir + '/' + AppConstants.DB_NAME
-
-    // 确保目录存在
-    try {
-      if (!fs.accessSync(rdbDir)) {
-        let p = ''
-        for (const part of rdbDir.split('/').filter(s => s.length > 0)) {
-          p += '/' + part
-          try { fs.mkdirSync(p) } catch (e2) { /* 已存在 */ }
-        }
-      }
-    } catch (e) {
-      hilog.info(0x0001, TAG, 'Dir check skipped')
-    }
-
-    // 写入 rawfile 到 RdbStore 精确路径
-    try {
-      const file = fs.openSync(dbPath, fs.OpenMode.CREATE | fs.OpenMode.WRITE_ONLY | fs.OpenMode.TRUNC)
-      fs.writeSync(file.fd, rawBytes.buffer as ArrayBuffer)
-      fs.closeSync(file)
-      hilog.info(0x0001, TAG, `DB file written: ${rawBytes.length}B → ${dbPath}`)
-    } catch (e) {
-      hilog.error(0x0001, TAG, `DB write failed: ${JSON.stringify(e)}`)
-      return
-    }
-
-    // 重开 store
-    try {
-      await RdbHelper.getStore(ctx)
-      hilog.info(0x0001, TAG, 'DB reopened after upgrade')
-    } catch (e) {
-      hilog.error(0x0001, TAG, `Store reopen failed: ${JSON.stringify(e)}`)
-    }
+    hilog.info(0x0001, TAG, `Seed loaded: ${mfrs.length} mfrs, ${cats.length} cats, ${chips.length} chips`)
   }
 
   private async runIntegrationTest(ctx: Context): Promise<void> {
@@ -154,20 +150,15 @@ export default class EntryAbility extends UIAbility {
 
   onWindowStageCreate(windowStage: window.WindowStage): void {
     hilog.info(0x0001, TAG, 'onWindowStageCreate')
-    // 🔧 修复1: 等 DB 就绪后再渲染页面
     if (this.initPromise) {
       this.initPromise.then(() => {
         windowStage.loadContent('pages/Index', (err) => {
-          if (err.code) {
-            hilog.error(0x0001, TAG, 'Failed to load content: %{public}d', err.code)
-          }
+          if (err.code) hilog.error(0x0001, TAG, 'Failed to load content: %{public}d', err.code)
         })
       })
     } else {
       windowStage.loadContent('pages/Index', (err) => {
-        if (err.code) {
-          hilog.error(0x0001, TAG, 'Failed to load content: %{public}d', err.code)
-        }
+        if (err.code) hilog.error(0x0001, TAG, 'Failed to load content: %{public}d', err.code)
       })
     }
   }
