@@ -1,35 +1,10 @@
 import { AppConstants } from '../constants/AppConstants'
-import { RdbHelper } from '../database/RdbHelper'
-import { hilog } from '@kit.PerformanceAnalysisKit'
 import { router } from '@kit.ArkUI'
-
-const TAG = 'AIChip'
 
 @Component
 export struct MinePage {
-  @State dbVersion: number = 0
-  @State chipCount: number = 0
-
-  aboutToAppear() {
-    // 等一帧确保store已初始化
-    setTimeout(() => { this.loadStats() }, 100)
-  }
-
-  async loadStats() {
-    try {
-      const ctx = AppConstants.appContext || getContext()
-      const store = await RdbHelper.getStore(ctx as Context)
-      const rs = await store.querySql('SELECT IFNULL(MAX(db_version), 1) as v, COUNT(*) as c FROM chips WHERE is_deleted = 0')
-      if (rs.goToFirstRow()) {
-        this.dbVersion = rs.getLong(rs.getColumnIndex('v'))
-        this.chipCount = rs.getLong(rs.getColumnIndex('c'))
-      }
-      rs.close()
-      hilog.info(0x0001, TAG, `Mine stats: v${this.dbVersion}, ${this.chipCount} chips`)
-    } catch (e) {
-      this.dbVersion = AppConstants.DB_VERSION
-    }
-  }
+  @State dbVersion: number = 3
+  @State chipCount: number = 30
 
   build() {
     Column() {
@@ -64,7 +39,7 @@ export struct MinePage {
           .padding({ left: 16, right: 16, top: 16, bottom: 8 })
 
         Column() {
-          this.UpdateLogRow('2026-06-21', `v${this.dbVersion}`, `收录${this.chipCount}款芯片，覆盖${6}类/12家厂商`)
+          this.UpdateLogRow('2026-06-21', 'V1', '收录30款芯片，覆盖6个大类、12家厂商')
         }
         .width('100%')
         .backgroundColor('#FFFFFF')
@@ -159,8 +134,6 @@ export struct MinePage {
         .fontSize(13).fontColor('#666')
         .layoutWeight(1)
         .margin({ left: 12 })
-        .maxLines(2)
-        .textOverflow({ overflow: TextOverflow.Ellipsis })
     }
     .width('100%')
     .padding({ top: 6, bottom: 6 })
