@@ -2,6 +2,7 @@
   "src": [
     "pages/Index",
     "pages/ChipDetailPage",
-    "pages/PrivacyPolicyPage"
+    "pages/PrivacyPolicyPage",
+    "pages/UserAgreementPage"
   ]
 }

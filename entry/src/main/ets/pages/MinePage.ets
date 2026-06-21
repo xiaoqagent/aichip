@@ -77,6 +77,21 @@ export struct MinePage {
       // 设置项
       Column() {
         Row() {
+          Text('用户协议').fontSize(15).fontColor('#333')
+          Blank()
+          Image($r('sys.symbol.chevron_right'))
+            .width(16).height(16).fillColor('#CCC')
+        }
+        .width('100%')
+        .padding(16)
+        .backgroundColor('#FFFFFF')
+        .onClick(() => {
+          router.pushUrl({ url: 'pages/UserAgreementPage' })
+        })
+
+        Divider().color('#F5F5F5').strokeWidth(0.5).margin({ left: 16 })
+
+        Row() {
           Text('隐私政策').fontSize(15).fontColor('#333')
           Blank()
           Image($r('sys.symbol.chevron_right'))
