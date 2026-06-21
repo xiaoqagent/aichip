@@ -2,6 +2,7 @@
 export struct SearchBar {
   @Link value: string
   @Prop placeholder: string = '搜索芯片名称或型号'
+  onChange?: (text: string) => void
 
   build() {
     Row() {
@@ -19,6 +20,9 @@ export struct SearchBar {
         .borderRadius(0)
         .onChange((text: string) => {
           this.value = text
+          if (this.onChange) {
+            this.onChange(text)
+          }
         })
     }
     .width('100%')
