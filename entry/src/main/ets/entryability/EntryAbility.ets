@@ -50,6 +50,10 @@ export default class EntryAbility extends UIAbility {
         // 版本升级检查
         await this.checkDbUpgrade(ctx)
       }
+
+      // 种子数据注入（INSERT OR IGNORE 保证幂等）
+      await this.insertSeedData(store)
+      hilog.info(0x0001, TAG, 'Seed data inserted')
     } catch (e) {
       hilog.error(0x0001, TAG, `DB init failed: ${JSON.stringify(e)}`)
     }
@@ -87,10 +91,6 @@ export default class EntryAbility extends UIAbility {
       await store.executeSql(stmt)
     }
     hilog.info(0x0001, TAG, 'Tables created')
-
-    // Phase3: 插入种子数据（厂商 + 分类 + 测试芯片）
-    await this.insertSeedData(store)
-    hilog.info(0x0001, TAG, 'Seed data inserted')
   }
 
   private async insertSeedData(store: relationalStore.RdbStore): Promise<void> {
