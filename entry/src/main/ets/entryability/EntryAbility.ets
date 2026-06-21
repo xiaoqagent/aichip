@@ -187,41 +187,59 @@ export default class EntryAbility extends UIAbility {
 
     hilog.info(0x0001, TAG, `DB upgrade: sandbox v${sandboxVersion} → rawfile v${rawVersion}`)
 
-    // 关闭旧连接
+    // Step 1: 关闭store
     RdbHelper.close()
 
-    // 从 rawfile 读取字节，写入临时文件
+    // Step 2: 读取rawfile
     const resMgr = ctx.resourceManager
     let rawBytes: Uint8Array = new Uint8Array(0)
     try {
       rawBytes = resMgr.getRawFileContentSync(AppConstants.RAW_DB_PATH)
+      hilog.info(0x0001, TAG, `Rawfile read: ${rawBytes.length} bytes`)
     } catch (e) {
       hilog.error(0x0001, TAG, `Rawfile read failed: ${JSON.stringify(e)}`)
       return
     }
 
-    const tmpPath = ctx.tempDir + '/restore_' + AppConstants.DB_NAME
+    // Step 3: 删旧库 + 写新库到精确路径
     try {
-      const file = fs.openSync(tmpPath, fs.OpenMode.CREATE | fs.OpenMode.WRITE_ONLY | fs.OpenMode.TRUNC)
+      // 删除旧store让系统释放文件句柄
+      await relationalStore.deleteRdbStore(ctx, AppConstants.DB_NAME)
+      hilog.info(0x0001, TAG, 'Old store deleted')
+    } catch (e) {
+      hilog.info(0x0001, TAG, 'No old store to delete')
+    }
+
+    // RdbStore内部路径: databaseDir/{bundleName}/entry/rdb/{name}
+    const dbDir = ctx.databaseDir + '/aichip.xiaoq.profile/entry/rdb'
+    const dbPath = dbDir + '/' + AppConstants.DB_NAME
+    try {
+      // 确保目录存在（用openSync CREATE会创建文件但不会创建父目录，需要先确保）
+      if (!fs.accessSync(dbDir)) {
+        // 递归创建目录 → 用逐级mkdir
+        const parts = dbDir.split('/').filter(p => p.length > 0)
+        let p = '/' + parts[0]
+        for (let i = 1; i < parts.length; i++) {
+          p += '/' + parts[i]
+          try { fs.mkdirSync(p) } catch (e2) { /* 已存在 */ }
+        }
+      }
+      const file = fs.openSync(dbPath, fs.OpenMode.CREATE | fs.OpenMode.WRITE_ONLY | fs.OpenMode.TRUNC)
       fs.writeSync(file.fd, rawBytes.buffer as ArrayBuffer)
       fs.closeSync(file)
-      hilog.info(0x0001, TAG, `Temp DB written: ${rawBytes.length} bytes`)
+      hilog.info(0x0001, TAG, `DB file written: ${dbPath}`)
     } catch (e) {
-      hilog.error(0x0001, TAG, `Temp write failed: ${JSON.stringify(e)}`)
+      hilog.error(0x0001, TAG, `DB write failed: ${JSON.stringify(e)}`)
       return
     }
 
-    // 用 restore API 恢复（不猜路径）
+    // Step 4: 重新打开（会读取新文件）
     try {
-      const store = await RdbHelper.getStore(ctx)
-      await store.restore(tmpPath)
-      hilog.info(0x0001, TAG, 'DB upgrade: restore complete')
+      await RdbHelper.getStore(ctx)
+      hilog.info(0x0001, TAG, 'DB upgrade: store reopened')
     } catch (e) {
-      hilog.error(0x0001, TAG, `DB restore failed: ${JSON.stringify(e)}`)
+      hilog.error(0x0001, TAG, `Store reopen failed: ${JSON.stringify(e)}`)
     }
-
-    // 清理临时文件
-    try { fs.unlinkSync(tmpPath) } catch (e) { /* ignore */ }
   }
 
   private async runIntegrationTest(ctx: Context): Promise<void> {
