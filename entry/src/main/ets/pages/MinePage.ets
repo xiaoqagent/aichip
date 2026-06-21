@@ -63,7 +63,7 @@ export struct MinePage {
           .padding({ left: 16, right: 16, top: 16, bottom: 8 })
 
         Column() {
-          this.UpdateLogRow('2026-06-21', 'v2', '初始建库：5款AI芯片数据（GPU/NPU/HBM）')
+          this.UpdateLogRow('2026-06-21', `v${this.dbVersion}`, `收录${this.chipCount}款芯片，覆盖${6}类/12家厂商`)
         }
         .width('100%')
         .backgroundColor('#FFFFFF')

@@ -187,10 +187,16 @@ export default class EntryAbility extends UIAbility {
 
     hilog.info(0x0001, TAG, `DB upgrade: sandbox v${sandboxVersion} → rawfile v${rawVersion}`)
 
-    // 关闭旧连接
+    // 关闭并删除旧 RdbStore
     RdbHelper.close()
+    try {
+      await relationalStore.deleteRdbStore(ctx, AppConstants.DB_NAME)
+    } catch (e) {
+      // 首次安装时 store 可能不存在
+      hilog.info(0x0001, TAG, 'No old store to delete, continuing')
+    }
 
-    // 从 rawfile 读取字节（不能用 fileIo，rawfile 是打包资源不是真实文件路径）
+    // 从 rawfile 读取字节
     const resMgr = ctx.resourceManager
     let rawBytes: Uint8Array = new Uint8Array(0)
     try {
