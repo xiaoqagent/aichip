@@ -31,3 +31,15 @@ _verify.bat
 _verify2.bat
 search.jpg
 方案评估资料/
+*px.png
+*hilog*
+*_hlog*
+*_log.txt
+*_hdc*
+*_verify*
+*_getlog*
+*_gl*
+*_test_*
+*.png
+*流水线*
+*原始需求*
