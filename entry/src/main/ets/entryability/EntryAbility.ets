@@ -30,7 +30,7 @@ export default class EntryAbility extends UIAbility {
       // 检查是否需要初始化
       let needInit = true
       try {
-        const rs = await store.querySql("SELECT COALESCE(MAX(db_version), 0) as v FROM chips")
+        const rs = await store.querySql("SELECT IFNULL(MAX(db_version), 0) as v FROM chips")
         if (rs.goToFirstRow()) {
           const v = rs.getLong(rs.getColumnIndex('v'))
           needInit = v < AppConstants.DB_VERSION

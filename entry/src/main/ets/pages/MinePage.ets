@@ -18,7 +18,7 @@ export struct MinePage {
   async loadStats() {
     try {
       const store = await RdbHelper.getStore(this.context)
-      const rs = await store.querySql('SELECT COALESCE(MAX(db_version), 1) as v, COUNT(*) as c FROM chips WHERE is_deleted = 0')
+      const rs = await store.querySql('SELECT IFNULL(MAX(db_version), 1) as v, COUNT(*) as c FROM chips WHERE is_deleted = 0')
       if (rs.goToFirstRow()) {
         this.dbVersion = rs.getLong(rs.getColumnIndex('v'))
         this.chipCount = rs.getLong(rs.getColumnIndex('c'))
