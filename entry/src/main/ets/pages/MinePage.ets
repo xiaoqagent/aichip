@@ -9,15 +9,16 @@ const TAG = 'AIChip'
 export struct MinePage {
   @State dbVersion: number = 0
   @State chipCount: number = 0
-  private context: Context = getContext()
 
   aboutToAppear() {
-    this.loadStats()
+    // 等一帧确保store已初始化
+    setTimeout(() => { this.loadStats() }, 100)
   }
 
   async loadStats() {
     try {
-      const store = await RdbHelper.getStore(this.context)
+      const ctx = AppConstants.appContext || getContext()
+      const store = await RdbHelper.getStore(ctx as Context)
       const rs = await store.querySql('SELECT IFNULL(MAX(db_version), 1) as v, COUNT(*) as c FROM chips WHERE is_deleted = 0')
       if (rs.goToFirstRow()) {
         this.dbVersion = rs.getLong(rs.getColumnIndex('v'))

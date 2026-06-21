@@ -3,7 +3,8 @@ export class AppConstants {
   static readonly APP_NAME: string = 'AI芯片'
   static readonly DB_VERSION: number = 3
   static readonly DB_NAME: string = 'ai_chip.db'
-  static readonly RAW_DB_PATH: string = 'init_db.db'
+  static readonly RAW_DB_PATH: string = 'seed_data.json'
+  static appContext: Context | null = null
 
   // 搜索
   static readonly SEARCH_DEBOUNCE_MS: number = 300

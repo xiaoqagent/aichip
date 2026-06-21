@@ -14,6 +14,7 @@ export default class EntryAbility extends UIAbility {
 
   onCreate(): void {
     hilog.info(0x0001, TAG, 'EntryAbility onCreate')
+    AppConstants.appContext = this.context
     this.initPromise = this.initApp()
   }
 
