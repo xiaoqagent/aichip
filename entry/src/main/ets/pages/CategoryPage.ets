@@ -2,6 +2,7 @@ import { CategoryModel } from '../model/CategoryModel'
 import { ChipModel } from '../model/ChipModel'
 import { CategoryDao } from '../dao/CategoryDao'
 import { ChipDao } from '../dao/ChipDao'
+import { ManufacturerDao } from '../dao/ManufacturerDao'
 import { ChipCard } from '../components/ChipCard'
 import { hilog } from '@kit.PerformanceAnalysisKit'
 import { router } from '@kit.ArkUI'
@@ -26,7 +27,8 @@ export struct CategoryPage {
   private chipCache: Map<string, ChipModel[]> = new Map()
   private context: Context = getContext()
 
-  aboutToAppear() {
+  async aboutToAppear() {
+    await ManufacturerDao.loadCache(this.context)
     this.loadCategories()
   }
 
@@ -95,12 +97,7 @@ export struct CategoryPage {
   }
 
   getMfrName(mfrId: number): string {
-    // 简单映射（后续可从DB加载）
-    const info: Record<number, string> = {
-      1: 'NVIDIA', 2: 'AMD', 3: 'Intel', 4: '华为', 5: '寒武纪',
-      6: 'Google', 7: 'SK海力士', 8: '三星'
-    }
-    return info[mfrId] || '未知'
+    return ManufacturerDao.getName(mfrId)
   }
 
   getDistinctMfrs(): MfrItem[] {
@@ -154,12 +151,31 @@ export struct CategoryPage {
       .padding({ left: 16, right: 16, top: 16, bottom: 8 })
       .backgroundColor('#FFFFFF')
 
-      // 筛选+排序栏
+      // 排序栏
       Row() {
-        // 厂商筛选
+        Text(this.sortMode === 'default' ? '✓ 默认' : '默认')
+          .fontSize(12)
+          .fontColor(this.sortMode === 'default' ? '#1A73E8' : '#999')
+          .onClick(() => { this.onSortChange('default') })
+        Text(this.sortMode === 'date' ? '✓ 日期' : '日期')
+          .fontSize(12)
+          .fontColor(this.sortMode === 'date' ? '#1A73E8' : '#999')
+          .margin({ left: 12 })
+          .onClick(() => { this.onSortChange('date') })
+        Text(this.sortMode === 'hot' ? '✓ 热度' : '热度')
+          .fontSize(12)
+          .fontColor(this.sortMode === 'hot' ? '#1A73E8' : '#999')
+          .margin({ left: 12 })
+          .onClick(() => { this.onSortChange('hot') })
+      }
+      .width('100%')
+      .padding({ left: 16, right: 16, top: 8, bottom: 4 })
+      .justifyContent(FlexAlign.End)
+      .backgroundColor('#FFFFFF')
+
+      // 厂商筛选（横向滚动）
+      Scroll() {
         Row() {
-          Text('厂商')
-            .fontSize(13).fontColor('#666')
           ForEach(this.getDistinctMfrs(), (mfr: MfrItem) => {
             Text(mfr.name)
               .fontSize(12)
@@ -167,35 +183,17 @@ export struct CategoryPage {
               .backgroundColor(this.filterMfrId === mfr.id ? '#1A73E8' : '#F0F0F0')
               .borderRadius(12)
               .padding({ left: 8, right: 8, top: 3, bottom: 3 })
-              .margin({ left: 4 })
+              .margin({ right: 6 })
               .onClick(() => {
                 this.onMfrFilter(this.filterMfrId === mfr.id ? 0 : mfr.id)
               })
           })
         }
-        .layoutWeight(1)
-
-        // 排序
-        Row() {
-          Text(this.sortMode === 'default' ? '✓ 默认' : '默认')
-            .fontSize(12)
-            .fontColor(this.sortMode === 'default' ? '#1A73E8' : '#999')
-            .margin({ left: 12 })
-            .onClick(() => { this.onSortChange('default') })
-          Text(this.sortMode === 'date' ? '✓ 日期' : '日期')
-            .fontSize(12)
-            .fontColor(this.sortMode === 'date' ? '#1A73E8' : '#999')
-            .margin({ left: 12 })
-            .onClick(() => { this.onSortChange('date') })
-          Text(this.sortMode === 'hot' ? '✓ 热度' : '热度')
-            .fontSize(12)
-            .fontColor(this.sortMode === 'hot' ? '#1A73E8' : '#999')
-            .margin({ left: 12 })
-            .onClick(() => { this.onSortChange('hot') })
-        }
+        .padding({ left: 16, right: 16, top: 4, bottom: 8 })
       }
+      .scrollable(ScrollDirection.Horizontal)
+      .scrollBar(BarState.Off)
       .width('100%')
-      .padding({ left: 16, right: 16, top: 8, bottom: 8 })
       .backgroundColor('#FFFFFF')
 
       // 芯片列表

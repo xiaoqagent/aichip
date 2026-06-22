@@ -3,8 +3,8 @@ import { router } from '@kit.ArkUI'
 
 @Component
 export struct MinePage {
-  @State dbVersion: number = 3
-  @State chipCount: number = 30
+  @State dbVersion: number = 10
+  @State chipCount: number = 168
 
   build() {
     Column() {
@@ -39,6 +39,7 @@ export struct MinePage {
           .padding({ left: 16, right: 16, top: 16, bottom: 8 })
 
         Column() {
+          this.UpdateLogRow('2026-06-22', 'V2', '新增138款，总计168款芯片，覆盖30个厂商，11个大类')
           this.UpdateLogRow('2026-06-21', 'V1', '收录30款芯片，覆盖6个大类、12家厂商')
         }
         .width('100%')

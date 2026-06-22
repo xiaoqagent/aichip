@@ -1,7 +1,7 @@
 export class AppConstants {
-  static readonly APP_VERSION: string = '1.0.7'
-  static readonly APP_NAME: string = 'AI芯片'
-  static readonly DB_VERSION: number = 3
+  static readonly APP_VERSION: string = '1.0.9'
+  static readonly APP_NAME: string = 'AI芯片查询'
+  static readonly DB_VERSION: number = 10
   static readonly DB_NAME: string = 'ai_chip.db'
   static readonly RAW_DB_PATH: string = 'seed_data.json'
   static appContext: Context | null = null

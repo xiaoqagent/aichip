@@ -2,8 +2,8 @@
   "app": {
     "bundleName": "aichip.xiaoq.profile",
     "vendor": "xiaoq",
-    "versionCode": 1000005,
-    "versionName": "1.0.7",
+    "versionCode": 1000009,
+    "versionName": "1.0.9",
     "icon": "$media:app_icon",
     "label": "$string:app_name"
   }

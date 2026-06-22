@@ -2,6 +2,7 @@ import { router } from '@kit.ArkUI'
 import { hilog } from '@kit.PerformanceAnalysisKit'
 import { ChipModel } from '../model/ChipModel'
 import { ChipDao } from '../dao/ChipDao'
+import { ManufacturerDao } from '../dao/ManufacturerDao'
 
 const TAG = 'AIChip'
 
@@ -17,7 +18,8 @@ struct ChipDetailPage {
   private chipId: number = 0
   private context: Context = getContext()
 
-  aboutToAppear() {
+  async aboutToAppear() {
+    await ManufacturerDao.loadCache(this.context)
     const params = router.getParams() as Record<string, Object>
     if (params) {
       this.chipId = params['chipId'] as number
@@ -53,11 +55,7 @@ struct ChipDetailPage {
   }
 
   getMfrName(id: number): string {
-    const m: Record<number, string> = {
-      1:'NVIDIA', 2:'AMD', 3:'Intel', 4:'华为',
-      5:'寒武纪', 6:'Google', 7:'SK海力士', 8:'三星'
-    }
-    return m[id] || '未知'
+    return ManufacturerDao.getName(id)
   }
 
   build() {
