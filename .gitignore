@@ -14,6 +14,21 @@ node_modules/
 # 密码配置
 build-profile.json5
 
+# 构建辅助脚本
+_build.bat
+_check.bat
+_deploy.bat
+_run_ps1.bat
+
+# 数据备份
+*.bak
+*.bak2
+*.bak3
+*.bak4
+*.bak5
+*.bak6
+*.bak7
+
 # IDE
 .idea/
 *.iml
@@ -44,4 +59,3 @@ search.jpg
 *流水线*
 *原始需求*
 init_db.db-journal
-build-profile.json5
