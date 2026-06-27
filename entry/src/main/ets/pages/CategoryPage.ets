@@ -154,13 +154,13 @@ export struct CategoryPage {
       // 标题栏 + 返回按钮
       Row() {
         Text('← 返回')
-          .fontSize(14).fontColor('#1A73E8')
+          .fontSize(14).fontColor('#1A1A1A')
           .onClick(() => { this.onBack() })
         Text(this.selectedCategory!.name)
           .fontSize(20).fontWeight(FontWeight.Bold).fontColor('#1A1A1A')
           .layoutWeight(1).margin({ left: 8 })
         Text(`${this.filteredChips.length}款`)
-          .fontSize(14).fontColor('#999')
+          .fontSize(14).fontColor('#1A1A1A')
       }
       .width('100%')
       .padding({ left: 16, right: 16, top: 16, bottom: 8 })
@@ -170,16 +170,16 @@ export struct CategoryPage {
       Row() {
         Text(this.sortMode === 'default' ? '✓ 默认' : '默认')
           .fontSize(12)
-          .fontColor(this.sortMode === 'default' ? '#1A73E8' : '#999')
+          .fontColor('#1A1A1A')
           .onClick(() => { this.onSortChange('default') })
         Text(this.sortMode === 'date' ? '✓ 日期' : '日期')
           .fontSize(12)
-          .fontColor(this.sortMode === 'date' ? '#1A73E8' : '#999')
+          .fontColor(this.sortMode === 'date' ? '#1A1A1A' : '#1A1A1A')
           .margin({ left: 12 })
           .onClick(() => { this.onSortChange('date') })
         Text(this.sortMode === 'hot' ? '✓ 热度' : '热度')
           .fontSize(12)
-          .fontColor(this.sortMode === 'hot' ? '#1A73E8' : '#999')
+          .fontColor(this.sortMode === 'hot' ? '#1A1A1A' : '#1A1A1A')
           .margin({ left: 12 })
           .onClick(() => { this.onSortChange('hot') })
       }
@@ -220,7 +220,7 @@ export struct CategoryPage {
           Image($r('app.media.app_icon'))
             .width(80).height(80).opacity(0.3)
           Text('暂无匹配的芯片')
-            .fontSize(15).fontColor('#BFBFBF').margin({ top: 16 })
+            .fontSize(15).fontColor('#1A1A1A').margin({ top: 16 })
         }
         .width('100%').layoutWeight(1).justifyContent(FlexAlign.Center)
       } else {
@@ -258,10 +258,10 @@ export struct CategoryPage {
                 Text(cat.name)
                   .fontSize(16).fontWeight(FontWeight.Medium).fontColor('#1A73E8')
                 Text(cat.description)
-                  .fontSize(12).fontColor('#999').margin({ top: 4 })
+                  .fontSize(12).fontColor('#1A1A1A').margin({ top: 4 })
                   .maxLines(2).textOverflow({ overflow: TextOverflow.Ellipsis })
                 Text(`${this.chipCountMap.get(cat.id) ?? 0}款芯片`)
-                  .fontSize(11).fontColor('#BFBFBF').margin({ top: 6 })
+                  .fontSize(11).fontColor('#1A1A1A').margin({ top: 6 })
               }
               .width('100%')
               .padding(14)

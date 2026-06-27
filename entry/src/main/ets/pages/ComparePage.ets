@@ -298,7 +298,7 @@ export struct ComparePage {
           Row() {
             // 参数名列
             Text('参数')
-              .fontSize(13).fontWeight(FontWeight.Medium).fontColor('#999')
+              .fontSize(13).fontWeight(FontWeight.Medium).fontColor('#1A1A1A')
               .width(72)
               .padding({ left: 12, top: 12, bottom: 12 })
 
@@ -323,7 +323,7 @@ export struct ComparePage {
           ForEach(this.specRows, (row: SpecRow, idx: number) => {
             Row() {
               Text(row.name)
-                .fontSize(13).fontColor('#666')
+                .fontSize(13).fontColor('#1A1A1A')
                 .width(72)
                 .padding({ left: 12, top: 10, bottom: 10 })
 
