@@ -167,7 +167,7 @@ export struct ComparePage {
                 Text(cat.name)
                   .fontSize(16).fontWeight(FontWeight.Medium).fontColor('#1A73E8')
                 Text(cat.description)
-                  .fontSize(12).fontColor('#999').margin({ top: 4 })
+                  .fontSize(12).fontColor('#1A1A1A').margin({ top: 4 })
                   .maxLines(2).textOverflow({ overflow: TextOverflow.Ellipsis })
               }
               .width('100%')
@@ -195,14 +195,14 @@ export struct ComparePage {
       // 标题栏
       Row() {
         Text('← 返回')
-          .fontSize(14).fontColor('#1A73E8')
+          .fontSize(14).fontColor('#1A1A1A')
           .onClick(() => { this.onBack() })
         Text(this.selectedCategory!.name)
           .fontSize(18).fontWeight(FontWeight.Bold).fontColor('#1A1A1A')
           .layoutWeight(1).margin({ left: 8 })
         Text(`已选 ${this.selectedIds.size}/5`)
           .fontSize(13)
-          .fontColor(this.selectedIds.size >= 2 ? '#1A73E8' : '#999')
+          .fontColor('#1A1A1A')
       }
       .width('100%')
       .padding({ left: 16, right: 16, top: 12, bottom: 12 })
@@ -212,7 +212,7 @@ export struct ComparePage {
         LoadingProgress().width(24).height(24).margin({ top: 60 })
       } else if (this.chips.length === 0) {
         Column() {
-          Text('该分类暂无芯片').fontSize(15).fontColor('#BFBFBF').margin({ top: 60 })
+          Text('该分类暂无芯片').fontSize(15).fontColor('#1A1A1A').margin({ top: 60 })
         }
         .width('100%').layoutWeight(1).justifyContent(FlexAlign.Center)
       } else {
@@ -239,7 +239,7 @@ export struct ComparePage {
                   Text(chip.name)
                     .fontSize(15).fontWeight(FontWeight.Medium).fontColor('#1A1A1A')
                   Text(chip.model)
-                    .fontSize(12).fontColor('#999').margin({ top: 2 })
+                    .fontSize(12).fontColor('#1A1A1A').margin({ top: 2 })
                 }
                 .alignItems(HorizontalAlign.Start)
                 .layoutWeight(1)
@@ -264,7 +264,7 @@ export struct ComparePage {
           `开始对比（${this.selectedIds.size}款）`)
           .width('100%').height(48)
           .fontSize(16).fontWeight(FontWeight.Medium)
-          .fontColor('#FFFFFF')
+          .fontColor('#1A1A1A')
           .backgroundColor(this.selectedIds.size >= 2 ? '#1A73E8' : '#CCC')
           .borderRadius(8)
           .enabled(this.selectedIds.size >= 2)
@@ -284,7 +284,7 @@ export struct ComparePage {
       // 标题栏
       Row() {
         Text('← 重新选择')
-          .fontSize(14).fontColor('#1A73E8')
+          .fontSize(14).fontColor('#1A1A1A')
           .onClick(() => { this.onBack() })
       }
       .width('100%')
@@ -308,7 +308,7 @@ export struct ComparePage {
                   .fontSize(14).fontWeight(FontWeight.Bold).fontColor('#1A1A1A')
                   .maxLines(2).textOverflow({ overflow: TextOverflow.Ellipsis })
                 Text(chip.model)
-                  .fontSize(11).fontColor('#999')
+                  .fontSize(11).fontColor('#1A1A1A')
                   .maxLines(1).textOverflow({ overflow: TextOverflow.Ellipsis })
                   .margin({ top: 2 })
               }

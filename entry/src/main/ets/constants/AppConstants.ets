@@ -1,5 +1,5 @@
 export class AppConstants {
-  static readonly APP_VERSION: string = '1.1.1'
+  static readonly APP_VERSION: string = '1.1.2'
   static readonly APP_NAME: string = 'AI芯片查询'
   static readonly DB_VERSION: number = 11
   static readonly DB_NAME: string = 'ai_chip.db'
