@@ -451,16 +451,16 @@
       "architecture": "MLUarch05",
       "process_node": "SMIC 7nm",
       "release_date": "2024-06",
-      "key_specs_json": "{\"FP16算力\": \"256TFLOPS\", \"INT8算力\": \"512TOPS\", \"NPU核心数\": \"128\", \"HBM类型\": \"HBM3存疑\"}",
-      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"FP16算力\", \"value\": \"256\", \"unit\": \"TFLOPS\"}, {\"group\": \"计算性能\", \"name\": \"INT8算力\", \"value\": \"512\", \"unit\": \"TOPS\"}, {\"group\": \"计算性能\", \"name\": \"NPU核心数\", \"value\": \"128\", \"unit\": \"\"}, {\"group\": \"内存规格\", \"name\": \"HBM类型\", \"value\": \"HBM3\", \"unit\": \"存疑\"}, {\"group\": \"内存规格\", \"name\": \"HBM容量\", \"value\": \"96\", \"unit\": \"GB 存疑\"}, {\"group\": \"物理规格\", \"name\": \"能效比\", \"value\": \"5\", \"unit\": \"TOPS/W\"}]",
+      "key_specs_json": "{\"FP16算力\": \"314TFLOPS\", \"INT8算力\": \"512TOPS\", \"NPU核心数\": \"128\", \"HBM类型\": \"HBM2e\", \"HBM容量\": \"192GB\"}",
+      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"FP16算力\", \"value\": \"256\", \"unit\": \"TFLOPS\"}, {\"group\": \"计算性能\", \"name\": \"INT8算力\", \"value\": \"512\", \"unit\": \"TOPS\"}, {\"group\": \"计算性能\", \"name\": \"NPU核心数\", \"value\": \"128\", \"unit\": \"\"}, {\"group\": \"内存规格\", \"name\": \"HBM类型\", \"value\": \"HBM2e\", \"unit\": \"\"}, {\"group\": \"内存规格\", \"name\": \"HBM容量\", \"value\": \"192\", \"unit\": \"GB\"}, {\"group\": \"物理规格\", \"name\": \"能效比\", \"value\": \"5\", \"unit\": \"TOPS/W\"}, {\"group\": \"计算性能\", \"name\": \"FP16算力\", \"value\": \"314\", \"unit\": \"TFLOPS\"}]",
       "description": "寒武纪第三代云端训练/推理一体AI芯片，128核",
       "image_path": "",
       "search_keywords": "思元590,MLU590,MLU590,寒武纪,MLUarch05",
       "is_hot": 0,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1747872000000,
-      "db_version": 3
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 9,
@@ -511,16 +511,16 @@
       "architecture": "NeuronCore-v2",
       "process_node": "TSMC 4nm",
       "release_date": "2024-11",
-      "key_specs_json": "{\"HBM类型\": \"HBM3\", \"HBM容量\": \"96GB\", \"NeuronLink带宽\": \"768GB/s\", \"TDP功耗\": \"500W 存疑\"}",
-      "detail_specs_json": "[{\"group\": \"内存规格\", \"name\": \"HBM类型\", \"value\": \"HBM3\", \"unit\": \"\"}, {\"group\": \"内存规格\", \"name\": \"HBM容量\", \"value\": \"96\", \"unit\": \"GB\"}, {\"group\": \"互联规格\", \"name\": \"NeuronLink带宽\", \"value\": \"768\", \"unit\": \"GB/s\"}, {\"group\": \"物理规格\", \"name\": \"TDP功耗\", \"value\": \"500\", \"unit\": \"W 存疑\"}]",
+      "key_specs_json": "{\"HBM类型\": \"HBM3\", \"HBM容量\": \"96GB\", \"NeuronLink带宽\": \"768GB/s\", \"TDP功耗\": \"~700W\"}",
+      "detail_specs_json": "[{\"group\": \"内存规格\", \"name\": \"HBM类型\", \"value\": \"HBM3\", \"unit\": \"\"}, {\"group\": \"内存规格\", \"name\": \"HBM容量\", \"value\": \"96\", \"unit\": \"GB\"}, {\"group\": \"互联规格\", \"name\": \"NeuronLink带宽\", \"value\": \"768\", \"unit\": \"GB/s\"}, {\"group\": \"物理规格\", \"name\": \"TDP功耗\", \"value\": \"~700\", \"unit\": \"W\"}]",
       "description": "AWS自研AI训练芯片，50万颗训练Anthropic Claude",
       "image_path": "",
       "search_keywords": "Trainium2,Trainium2,Trainium2,AWS,NeuronCore-v2",
       "is_hot": 0,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1747872000000,
-      "db_version": 3
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 12,
@@ -544,23 +544,23 @@
     },
     {
       "id": 13,
-      "name": "B100",
-      "model": "B100",
+      "name": "B200",
+      "model": "NVIDIA B200",
       "manufacturer_id": 1,
       "category_id": 1,
       "architecture": "Blackwell",
       "process_node": "TSMC 4nm",
-      "release_date": "2024-12",
-      "key_specs_json": "{\"FP16算力\": \"1800存疑\", \"显存容量\": \"192GB 存疑\", \"显存类型\": \"HBM3e\", \"TDP功耗\": \"700W 存疑\"}",
-      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"FP16算力\", \"value\": \"1800\", \"unit\": \"存疑\"}, {\"group\": \"内存规格\", \"name\": \"显存容量\", \"value\": \"192\", \"unit\": \"GB 存疑\"}, {\"group\": \"内存规格\", \"name\": \"显存类型\", \"value\": \"HBM3e\", \"unit\": \"\"}, {\"group\": \"物理规格\", \"name\": \"TDP功耗\", \"value\": \"700\", \"unit\": \"W 存疑\"}]",
-      "description": "NVIDIA Blackwell B100，介于B200和H100之间的Blackwell芯片",
+      "release_date": "2024-08",
+      "key_specs_json": "{\"FP8算力\": \"9PFLOPS\", \"显存容量\": \"180GB\", \"显存类型\": \"HBM3e\", \"TDP功耗\": \"1000W\"}",
+      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"FP8稀疏\", \"value\": \"18\", \"unit\": \"PFLOPS\"}, {\"group\": \"计算性能\", \"name\": \"FP8密集\", \"value\": \"9\", \"unit\": \"PFLOPS\"}, {\"group\": \"计算性能\", \"name\": \"FP16/BF16密集\", \"value\": \"4.5\", \"unit\": \"PFLOPS\"}, {\"group\": \"计算性能\", \"name\": \"FP64\", \"value\": \"64\", \"unit\": \"TFLOPS\"}, {\"group\": \"内存规格\", \"name\": \"显存容量\", \"value\": \"180\", \"unit\": \"GB HBM3e\"}, {\"group\": \"内存规格\", \"name\": \"显存带宽\", \"value\": \"8\", \"unit\": \"TB/s\"}, {\"group\": \"互联规格\", \"name\": \"NVLink带宽\", \"value\": \"1800\", \"unit\": \"GB/s\"}, {\"group\": \"物理规格\", \"name\": \"TDP功耗\", \"value\": \"1000\", \"unit\": \"W\"}, {\"group\": \"物理规格\", \"name\": \"晶体管数\", \"value\": \"2080\", \"unit\": \"亿\"}]",
+      "description": "NVIDIA Blackwell B200，FP8 9PFLOPS，180GB HBM3e @8TB/s，TDP 1000W，2080亿晶体管",
       "image_path": "",
-      "search_keywords": "B100,B100,B100,NVIDIA,Blackwell",
-      "is_hot": 0,
+      "search_keywords": "B200,NVIDIA,Blackwell,GPU,HBM3e,FP8",
+      "is_hot": 1,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1747872000000,
-      "db_version": 3
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 14,
@@ -569,18 +569,18 @@
       "manufacturer_id": 10,
       "category_id": 1,
       "architecture": "深算",
-      "process_node": "存疑",
+      "process_node": "14nm",
       "release_date": "2024-12",
-      "key_specs_json": "{\"FP16算力\": \"147存疑\", \"显存容量\": \"80GB 存疑\", \"显存类型\": \"HBM2e存疑\"}",
-      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"FP16算力\", \"value\": \"147\", \"unit\": \"存疑\"}, {\"group\": \"内存规格\", \"name\": \"显存容量\", \"value\": \"80\", \"unit\": \"GB 存疑\"}, {\"group\": \"内存规格\", \"name\": \"显存类型\", \"value\": \"HBM2e\", \"unit\": \"存疑\"}]",
+      "key_specs_json": "{\"FP16算力\": \"100TFLOPS\", \"显存容量\": \"64GB\", \"显存类型\": \"HBM2\", \"TDP功耗\": \"300W\"}",
+      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"FP16算力\", \"value\": \"100\", \"unit\": \"TFLOPS\"}, {\"group\": \"内存规格\", \"name\": \"显存容量\", \"value\": \"64\", \"unit\": \"GB HBM2\"}, {\"group\": \"内存规格\", \"name\": \"显存带宽\", \"value\": \"896\", \"unit\": \"GB/s\"}, {\"group\": \"物理规格\", \"name\": \"TDP功耗\", \"value\": \"300\", \"unit\": \"W\"}]",
       "description": "海光深算DCU，面向AI训练的国产GPU加速卡",
       "image_path": "",
       "search_keywords": "海光DCU K100,DCU K100,DCUK100,海光,深算",
       "is_hot": 0,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1747872000000,
-      "db_version": 3
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 15,
@@ -591,16 +591,16 @@
       "architecture": "Rubin",
       "process_node": "TSMC 3nm",
       "release_date": "2026-H2",
-      "key_specs_json": "{\"FP4算力\": \"50PFLOPS\", \"FP8算力\": \"25PFLOPS 存疑\", \"FP16算力\": \"12.5PFLOPS 存疑\", \"晶体管数\": \"336亿\"}",
-      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"FP4算力\", \"value\": \"50\", \"unit\": \"PFLOPS\"}, {\"group\": \"计算性能\", \"name\": \"FP8算力\", \"value\": \"25\", \"unit\": \"PFLOPS 存疑\"}, {\"group\": \"计算性能\", \"name\": \"FP16算力\", \"value\": \"12.5\", \"unit\": \"PFLOPS 存疑\"}, {\"group\": \"计算性能\", \"name\": \"晶体管数\", \"value\": \"336\", \"unit\": \"亿\"}, {\"group\": \"内存规格\", \"name\": \"HBM类型\", \"value\": \"HBM4\", \"unit\": \"\"}, {\"group\": \"内存规格\", \"name\": \"HBM容量\", \"value\": \"288\", \"unit\": \"GB\"}, {\"group\": \"内存规格\", \"name\": \"HBM带宽\", \"value\": \"22\", \"unit\": \"TB/s\"}, {\"group\": \"互联规格\", \"name\": \"NVLink带宽\", \"value\": \"3600\", \"unit\": \"GB/s 存疑\"}, {\"group\": \"物理规格\", \"name\": \"TDP功耗\", \"value\": \"1500\", \"unit\": \"W 存疑\"}]",
-      "description": "NVIDIA下一代Rubin架构GPU，336B晶体管，288GB HBM4，FP4 50 PFLOPS",
+      "key_specs_json": "{\"FP4推理\": \"50PFLOPS\", \"FP8密集\": \"17.5PFLOPS\", \"FP16/BF16\": \"4PFLOPS\", \"HBM4\": \"288GB HBM4\", \"NVLink\": \"3.6TB/s\"}",
+      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"FP4推理\", \"value\": \"50\", \"unit\": \"PFLOPS\"}, {\"group\": \"计算性能\", \"name\": \"FP4训练\", \"value\": \"35\", \"unit\": \"PFLOPS\"}, {\"group\": \"计算性能\", \"name\": \"FP8/FP6密集\", \"value\": \"17.5\", \"unit\": \"PFLOPS\"}, {\"group\": \"计算性能\", \"name\": \"FP16/BF16\", \"value\": \"4\", \"unit\": \"PFLOPS\"}, {\"group\": \"内存规格\", \"name\": \"HBM\", \"value\": \"288\", \"unit\": \"GB HBM4\"}, {\"group\": \"内存规格\", \"name\": \"HBM带宽\", \"value\": \"22\", \"unit\": \"TB/s\"}, {\"group\": \"互联规格\", \"name\": \"NVLink带宽\", \"value\": \"3.6\", \"unit\": \"TB/s\"}, {\"group\": \"物理规格\", \"name\": \"TDP功耗\", \"value\": \"~1500(推测)\", \"unit\": \"W\"}]",
+      "description": "NVIDIA Vera Rubin R200，FP4 50PFLOPS推理/35训练，FP8 17.5PFLOPS，288GB HBM4，NVLink 3.6TB/s",
       "image_path": "",
-      "search_keywords": "R200,Rubin R200,RubinR200,NVIDIA,Rubin",
+      "search_keywords": "R200,Vera Rubin,NVIDIA,GPU,HBM4,NVLink,FP4",
       "is_hot": 1,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1747872000000,
-      "db_version": 3
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 16,
@@ -609,18 +609,18 @@
       "manufacturer_id": 1,
       "category_id": 1,
       "architecture": "Rubin",
-      "process_node": "TSMC 2nm 存疑",
+      "process_node": "推测TSMC 2nm",
       "release_date": "2027",
-      "key_specs_json": "{\"FP4算力\": \"100PFLOPS 存疑\", \"HBM类型\": \"HBM4e存疑\", \"HBM容量\": \"384GB 存疑\", \"HBM带宽\": \"30TB/s 存疑\"}",
-      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"FP4算力\", \"value\": \"100\", \"unit\": \"PFLOPS 存疑\"}, {\"group\": \"内存规格\", \"name\": \"HBM类型\", \"value\": \"HBM4e\", \"unit\": \"存疑\"}, {\"group\": \"内存规格\", \"name\": \"HBM容量\", \"value\": \"384\", \"unit\": \"GB 存疑\"}, {\"group\": \"内存规格\", \"name\": \"HBM带宽\", \"value\": \"30\", \"unit\": \"TB/s 存疑\"}, {\"group\": \"物理规格\", \"name\": \"TDP功耗\", \"value\": \"2000\", \"unit\": \"W 存疑\"}]",
-      "description": "NVIDIA Rubin Ultra GPU，预计2027年发布",
+      "key_specs_json": "{\"FP4算力\": \"100PFLOPS\", \"HBM4e容量\": \"~1TB\", \"定位\": \"4-reticle旗舰\"}",
+      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"FP4算力\", \"value\": \"100\", \"unit\": \"PFLOPS\"}, {\"group\": \"内存规格\", \"name\": \"HBM4e容量\", \"value\": \"~1TB(4-reticle总计)\", \"unit\": \"\"}, {\"group\": \"互联规格\", \"name\": \"NVLink\", \"value\": \"待定\", \"unit\": \"\"}, {\"group\": \"物理规格\", \"name\": \"TDP功耗\", \"value\": \"待定\", \"unit\": \"W\"}]",
+      "description": "NVIDIA Rubin Ultra R300，4-reticle旗舰，FP4 100PFLOPS，~1TB HBM4e，预研阶段H2 2027+",
       "image_path": "",
-      "search_keywords": "R300,Rubin R300,RubinR300,NVIDIA,Rubin",
+      "search_keywords": "R300,Rubin Ultra,NVIDIA,GPU,4-reticle,FP4,HBM4e",
       "is_hot": 0,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1747872000000,
-      "db_version": 3
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 17,
@@ -631,16 +631,16 @@
       "architecture": "DaVinci",
       "process_node": "SMIC 7nm+",
       "release_date": "2026-03",
-      "key_specs_json": "{\"FP4算力\": \"1.56PFLOPS\", \"FP8算力\": \"存疑\", \"INT8算力\": \"存疑TOPS\", \"HBM类型\": \"HiBL 1.0\"}",
-      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"FP4算力\", \"value\": \"1.56\", \"unit\": \"PFLOPS\"}, {\"group\": \"计算性能\", \"name\": \"FP8算力\", \"value\": \"存疑\", \"unit\": \"\"}, {\"group\": \"计算性能\", \"name\": \"INT8算力\", \"value\": \"存疑\", \"unit\": \"TOPS\"}, {\"group\": \"内存规格\", \"name\": \"HBM类型\", \"value\": \"HiBL 1.0\", \"unit\": \"\"}, {\"group\": \"内存规格\", \"name\": \"HBM容量\", \"value\": \"128\", \"unit\": \"GB 存疑\"}, {\"group\": \"内存规格\", \"name\": \"HBM带宽\", \"value\": \"1.6\", \"unit\": \"TB/s 存疑\"}, {\"group\": \"物理规格\", \"name\": \"TDP功耗\", \"value\": \"存疑\", \"unit\": \"W\"}]",
+      "key_specs_json": "{\"FP8算力\": \"~1PFLOPS\", \"FP4算力\": \"1.56PFLOPS\", \"HBM容量\": \"128GB\", \"HBM类型\": \"HiBL 1.0\", \"TDP功耗\": \"900W\"}",
+      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"FP4算力\", \"value\": \"1.56~2\", \"unit\": \"PFLOPS\"}, {\"group\": \"计算性能\", \"name\": \"FP8算力\", \"value\": \"~1\", \"unit\": \"PFLOPS\"}, {\"group\": \"内存规格\", \"name\": \"HBM类型\", \"value\": \"HiBL 1.0\", \"unit\": \"\"}, {\"group\": \"内存规格\", \"name\": \"HBM容量\", \"value\": \"128\", \"unit\": \"GB\"}, {\"group\": \"内存规格\", \"name\": \"HBM带宽\", \"value\": \"1.6\", \"unit\": \"TB/s\"}, {\"group\": \"物理规格\", \"name\": \"TDP功耗\", \"value\": \"900\", \"unit\": \"W\"}]",
       "description": "昇腾950 Prefill优化版，FP4 1.56P，112GB HBM，面向大模型推理",
       "image_path": "",
       "search_keywords": "昇腾950PR,Ascend 950PR,Ascend950PR,华为,DaVinci",
       "is_hot": 1,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1747872000000,
-      "db_version": 3
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 18,
@@ -651,16 +651,16 @@
       "architecture": "DaVinci",
       "process_node": "SMIC 7nm+",
       "release_date": "2026-Q4",
-      "key_specs_json": "{\"FP8算力\": \"存疑PFLOPS\", \"BF16算力\": \"存疑TFLOPS\", \"HBM类型\": \"HiBL 2.0存疑\", \"HBM容量\": \"192GB 存疑\"}",
-      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"FP8算力\", \"value\": \"存疑\", \"unit\": \"PFLOPS\"}, {\"group\": \"计算性能\", \"name\": \"BF16算力\", \"value\": \"存疑\", \"unit\": \"TFLOPS\"}, {\"group\": \"内存规格\", \"name\": \"HBM类型\", \"value\": \"HiBL 2.0\", \"unit\": \"存疑\"}, {\"group\": \"内存规格\", \"name\": \"HBM容量\", \"value\": \"192\", \"unit\": \"GB 存疑\"}, {\"group\": \"物理规格\", \"name\": \"TDP功耗\", \"value\": \"存疑\", \"unit\": \"W\"}]",
-      "description": "昇腾950训练/解码增强版，面向万亿参数大模型训练",
+      "key_specs_json": "{\"FP8算力\": \"~1PFLOPS\", \"BF16算力\": \"~1PFLOPS\", \"HBM类型\": \"HiZQ 2.0\", \"HBM容量\": \"144GB\", \"HBM带宽\": \"~4TB/s\"}",
+      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"FP8/HIF8算力\", \"value\": \"~1\", \"unit\": \"PFLOPS\"}, {\"group\": \"计算性能\", \"name\": \"BF16算力\", \"value\": \"~1\", \"unit\": \"PFLOPS\"}, {\"group\": \"内存规格\", \"name\": \"HBM类型\", \"value\": \"HiZQ 2.0\", \"unit\": \"\"}, {\"group\": \"内存规格\", \"name\": \"HBM容量\", \"value\": \"144\", \"unit\": \"GB\"}, {\"group\": \"内存规格\", \"name\": \"HBM带宽\", \"value\": \"~4\", \"unit\": \"TB/s\"}, {\"group\": \"物理规格\", \"name\": \"TDP功耗\", \"value\": \"待定\", \"unit\": \"W\"}]",
+      "description": "华为昇腾950DT Decode&Training专用，HiZQ 2.0内存144GB @~4TB/s，FP8 ~1PFLOPS",
       "image_path": "",
       "search_keywords": "昇腾950DT,Ascend 950DT,Ascend950DT,华为,DaVinci",
       "is_hot": 0,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1747872000000,
-      "db_version": 3
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 19,
@@ -671,16 +671,16 @@
       "architecture": "Trillium",
       "process_node": "TSMC 4nm",
       "release_date": "2024-10",
-      "key_specs_json": "{\"BF16算力\": \"926TFLOPS 存疑\", \"INT8算力\": \"1852TOPS 存疑\", \"HBM类型\": \"HBM3\", \"HBM容量\": \"128GB 存疑\"}",
-      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"BF16算力\", \"value\": \"926\", \"unit\": \"TFLOPS 存疑\"}, {\"group\": \"计算性能\", \"name\": \"INT8算力\", \"value\": \"1852\", \"unit\": \"TOPS 存疑\"}, {\"group\": \"内存规格\", \"name\": \"HBM类型\", \"value\": \"HBM3\", \"unit\": \"\"}, {\"group\": \"内存规格\", \"name\": \"HBM容量\", \"value\": \"128\", \"unit\": \"GB 存疑\"}, {\"group\": \"互联规格\", \"name\": \"ICI互联带宽\", \"value\": \"6400\", \"unit\": \"Gbps 存疑\"}]",
-      "description": "Google第六代TPU(Trillium)，256芯片/Pod，面向训练",
+      "key_specs_json": "{\"BF16算力\": \"918TFLOPS\", \"INT8算力\": \"~1836TOPS\", \"HBM\": \"32GB HBM3e\", \"ICI互联\": \"6400Gbps\"}",
+      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"BF16算力\", \"value\": \"918\", \"unit\": \"TFLOPS\"}, {\"group\": \"计算性能\", \"name\": \"INT8算力\", \"value\": \"~1836\", \"unit\": \"TOPS\"}, {\"group\": \"内存规格\", \"name\": \"HBM\", \"value\": \"32\", \"unit\": \"GB HBM3e\"}, {\"group\": \"互联规格\", \"name\": \"ICI带宽\", \"value\": \"800\", \"unit\": \"GB/s(=6400Gbps)\"}]",
+      "description": "Google TPU v6e Trillium，BF16 918TFLOPS，32GB HBM3e，ICI 800GB/s",
       "image_path": "",
       "search_keywords": "TPU v6e,Trillium,Trillium,Google,Trillium",
       "is_hot": 0,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1747872000000,
-      "db_version": 3
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 20,
@@ -689,18 +689,18 @@
       "manufacturer_id": 6,
       "category_id": 4,
       "architecture": "第8代",
-      "process_node": "TSMC 3nm 存疑",
+      "process_node": "TSMC 3nm",
       "release_date": "2026-04",
-      "key_specs_json": "{\"BF16算力\": \"存疑PFLOPS\", \"HBM类型\": \"HBM4存疑\", \"HBM容量\": \"存疑GB\", \"ICI互联带宽\": \"存疑Gbps\"}",
-      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"BF16算力\", \"value\": \"存疑\", \"unit\": \"PFLOPS\"}, {\"group\": \"内存规格\", \"name\": \"HBM类型\", \"value\": \"HBM4\", \"unit\": \"存疑\"}, {\"group\": \"内存规格\", \"name\": \"HBM容量\", \"value\": \"存疑\", \"unit\": \"GB\"}, {\"group\": \"互联规格\", \"name\": \"ICI互联带宽\", \"value\": \"存疑\", \"unit\": \"Gbps\"}]",
-      "description": "Google第八代训练专用TPU，Broadcom设计，面向前沿大模型训练",
+      "key_specs_json": "{\"FP4算力\": \"12.6PFLOPS\", \"HBM\": \"216GB HBM3e\", \"HBM带宽\": \"6.5TB/s\", \"ICI互联\": \"19.2Tb/s\"}",
+      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"FP4算力\", \"value\": \"12.6\", \"unit\": \"PFLOPS\"}, {\"group\": \"内存规格\", \"name\": \"HBM\", \"value\": \"216\", \"unit\": \"GB HBM3e\"}, {\"group\": \"内存规格\", \"name\": \"HBM带宽\", \"value\": \"6.5\", \"unit\": \"TB/s\"}, {\"group\": \"互联规格\", \"name\": \"ICI带宽\", \"value\": \"19.2\", \"unit\": \"Tb/s(=2.4TB/s)\"}, {\"group\": \"互联规格\", \"name\": \"超节点规模\", \"value\": \"9600\", \"unit\": \"芯片/pod\"}, {\"group\": \"互联规格\", \"name\": \"超节点FP4\", \"value\": \"121\", \"unit\": \"EFLOPS\"}]",
+      "description": "Google TPU v8t Sunfish训练专用，FP4 12.6PFLOPS/chip，216GB HBM3e @6.5TB/s，9600芯片超节点121 EFLOPS",
       "image_path": "",
       "search_keywords": "TPU v8t,TPU 8t,TPU8t,Google,第8代",
       "is_hot": 0,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1747872000000,
-      "db_version": 3
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 21,
@@ -709,18 +709,18 @@
       "manufacturer_id": 6,
       "category_id": 4,
       "architecture": "第8代",
-      "process_node": "TSMC 3nm 存疑",
+      "process_node": "TSMC 3nm",
       "release_date": "2026-04",
-      "key_specs_json": "{\"BF16算力\": \"存疑PFLOPS\", \"HBM类型\": \"HBM4存疑\", \"HBM容量\": \"存疑GB\", \"ICI互联带宽\": \"存疑Gbps\"}",
-      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"BF16算力\", \"value\": \"存疑\", \"unit\": \"PFLOPS\"}, {\"group\": \"内存规格\", \"name\": \"HBM类型\", \"value\": \"HBM4\", \"unit\": \"存疑\"}, {\"group\": \"内存规格\", \"name\": \"HBM容量\", \"value\": \"存疑\", \"unit\": \"GB\"}, {\"group\": \"互联规格\", \"name\": \"ICI互联带宽\", \"value\": \"存疑\", \"unit\": \"Gbps\"}]",
-      "description": "Google第八代推理专用TPU，MediaTek设计，面向大规模推理",
+      "key_specs_json": "{\"FP4算力\": \"10.1PFLOPS\", \"HBM\": \"288GB HBM3e\", \"HBM带宽\": \"8.6TB/s\", \"片上SRAM\": \"384MB\"}",
+      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"FP4算力\", \"value\": \"10.1\", \"unit\": \"PFLOPS\"}, {\"group\": \"内存规格\", \"name\": \"HBM\", \"value\": \"288\", \"unit\": \"GB HBM3e\"}, {\"group\": \"内存规格\", \"name\": \"HBM带宽\", \"value\": \"8.6\", \"unit\": \"TB/s\"}, {\"group\": \"内存规格\", \"name\": \"片上SRAM\", \"value\": \"384\", \"unit\": \"MB\"}, {\"group\": \"互联规格\", \"name\": \"ICI带宽\", \"value\": \"19.2\", \"unit\": \"Tb/s(=2.4TB/s)\"}]",
+      "description": "Google TPU v8i Zebrafish推理专用，FP4 10.1PFLOPS/chip，288GB HBM3e @8.6TB/s，384MB SRAM",
       "image_path": "",
       "search_keywords": "TPU v8i,TPU 8i,TPU8i,Google,第8代",
       "is_hot": 0,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1747872000000,
-      "db_version": 3
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 22,
@@ -729,18 +729,18 @@
       "manufacturer_id": 8,
       "category_id": 5,
       "architecture": "HBM4",
-      "process_node": "Samsung 1c nm 存疑",
+      "process_node": "Samsung/SK hynix 1b nm",
       "release_date": "2025-Q3",
-      "key_specs_json": "{\"单颗容量\": \"48GB 存疑\", \"带宽\": \"1.6TB/s 存疑\", \"堆叠层数\": \"16层\", \"I/O速率\": \"8Gbps 存疑\"}",
-      "detail_specs_json": "[{\"group\": \"性能规格\", \"name\": \"单颗容量\", \"value\": \"48\", \"unit\": \"GB 存疑\"}, {\"group\": \"性能规格\", \"name\": \"带宽\", \"value\": \"1.6\", \"unit\": \"TB/s 存疑\"}, {\"group\": \"性能规格\", \"name\": \"堆叠层数\", \"value\": \"16\", \"unit\": \"层\"}, {\"group\": \"性能规格\", \"name\": \"I/O速率\", \"value\": \"8\", \"unit\": \"Gbps 存疑\"}]",
-      "description": "三星16层堆叠HBM4，率先量产出货",
+      "key_specs_json": "{\"单颗容量\": \"48GB(16×24Gb)\", \"带宽\": \"1.6TB/s\", \"堆叠层数\": \"16层\", \"I/O速率\": \"8Gbps\", \"JEDEC标准\": \"✅\"}",
+      "detail_specs_json": "[{\"group\": \"性能规格\", \"name\": \"单颗容量\", \"value\": \"48(16×24Gb)\", \"unit\": \"GB\"}, {\"group\": \"性能规格\", \"name\": \"带宽(6.4Gbps下)\", \"value\": \"1.6\", \"unit\": \"TB/s\"}, {\"group\": \"性能规格\", \"name\": \"最大带宽\", \"value\": \"2.0(8Gbps下)\", \"unit\": \"TB/s\"}, {\"group\": \"性能规格\", \"name\": \"堆叠层数\", \"value\": \"16\", \"unit\": \"层\"}, {\"group\": \"性能规格\", \"name\": \"I/O速率\", \"value\": \"6.4~8\", \"unit\": \"Gbps\"}, {\"group\": \"性能规格\", \"name\": \"JEDEC标准\", \"value\": \"确认发布\", \"unit\": \"\"}]",
+      "description": "JEDEC HBM4标准16Hi堆叠，48GB容量，带宽1.6~2.0TB/s，6.4~8Gbps I/O",
       "image_path": "",
       "search_keywords": "HBM4 16Hi,HBM4 16Hi,HBM416Hi,三星,HBM4",
       "is_hot": 1,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1747872000000,
-      "db_version": 3
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 23,
@@ -749,18 +749,18 @@
       "manufacturer_id": 8,
       "category_id": 5,
       "architecture": "HBM4E",
-      "process_node": "Samsung 1c nm 存疑",
+      "process_node": "Samsung 1c nm(6代10nm级)",
       "release_date": "2025-11",
-      "key_specs_json": "{\"单颗容量\": \"48GB\", \"带宽\": \"3.6TB/s\", \"I/O速率\": \"16Gbps\"}",
-      "detail_specs_json": "[{\"group\": \"性能规格\", \"name\": \"单颗容量\", \"value\": \"48\", \"unit\": \"GB\"}, {\"group\": \"性能规格\", \"name\": \"带宽\", \"value\": \"3.6\", \"unit\": \"TB/s\"}, {\"group\": \"性能规格\", \"name\": \"I/O速率\", \"value\": \"16\", \"unit\": \"Gbps\"}]",
-      "description": "三星HBM4E，3.6TB/s带宽，48GB/堆叠，率先送样",
+      "key_specs_json": "{\"制程\": \"Samsung 1c nm\", \"I/O速率\": \"16Gbps/pin\", \"带宽\": \"4.0TB/s\", \"厂商\": \"Samsung\"}",
+      "detail_specs_json": "[{\"group\": \"性能规格\", \"name\": \"制程\", \"value\": \"Samsung 1c(6代10nm级)\", \"unit\": \"\"}, {\"group\": \"性能规格\", \"name\": \"I/O速率\", \"value\": \"16\", \"unit\": \"Gbps/pin\"}, {\"group\": \"性能规格\", \"name\": \"带宽\", \"value\": \"4.0\", \"unit\": \"TB/s\"}, {\"group\": \"性能规格\", \"name\": \"厂商\", \"value\": \"Samsung\", \"unit\": \"\"}]",
+      "description": "Samsung HBM4E，1c nm(6代10nm级)DRAM工艺，16Gbps/pin，带宽4.0TB/s",
       "image_path": "",
       "search_keywords": "HBM4E,HBM4E,HBM4E,三星,HBM4E",
       "is_hot": 0,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1747872000000,
-      "db_version": 3
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 24,
@@ -1629,7 +1629,7 @@
       "manufacturer_id": 9,
       "category_id": 8,
       "architecture": "自研ASIC",
-      "process_node": "—",
+      "process_node": "推测16nm",
       "release_date": "2013-11",
       "key_specs_json": "{\"网络卸载\": \"10Gbps\", \"功能\": \"网络虚拟化\", \"定位\": \"首代Nitro\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"网络带宽\", \"value\": \"10\", \"unit\": \"Gbps\"}, {\"group\": \"加速引擎\", \"name\": \"网络卸载\", \"value\": \"VPC虚拟化\", \"unit\": \"\"}, {\"group\": \"加速引擎\", \"name\": \"功能\", \"value\": \"网络I/O卸载\", \"unit\": \"\"}]",
@@ -1639,8 +1639,8 @@
       "is_hot": 0,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782140840555,
-      "db_version": 7
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 68,
@@ -1649,7 +1649,7 @@
       "manufacturer_id": 9,
       "category_id": 8,
       "architecture": "自研ASIC",
-      "process_node": "—",
+      "process_node": "推测16nm",
       "release_date": "2017-11",
       "key_specs_json": "{\"网络\": \"25Gbps\", \"新增\": \"EBS存储卸载\", \"实例\": \"C5\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"网络带宽\", \"value\": \"25\", \"unit\": \"Gbps\"}, {\"group\": \"加速引擎\", \"name\": \"网络卸载\", \"value\": \"VPC虚拟化\", \"unit\": \"\"}, {\"group\": \"加速引擎\", \"name\": \"存储卸载\", \"value\": \"EBS远程存储\", \"unit\": \"\"}, {\"group\": \"互联规格\", \"name\": \"PCIe\", \"value\": \"3.0\", \"unit\": \"\"}]",
@@ -1659,8 +1659,8 @@
       "is_hot": 0,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782140840555,
-      "db_version": 7
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 69,
@@ -1669,7 +1669,7 @@
       "manufacturer_id": 9,
       "category_id": 8,
       "architecture": "自研ASIC",
-      "process_node": "—",
+      "process_node": "推测16nm",
       "release_date": "2018-11",
       "key_specs_json": "{\"网络\": \"25Gbps\", \"新增\": \"NVMe本地盘\", \"安全\": \"硬件隔离\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"网络带宽\", \"value\": \"25\", \"unit\": \"Gbps\"}, {\"group\": \"加速引擎\", \"name\": \"网络卸载\", \"value\": \"VPC+ENA\", \"unit\": \"\"}, {\"group\": \"加速引擎\", \"name\": \"存储卸载\", \"value\": \"EBS+NVMe本地\", \"unit\": \"\"}, {\"group\": \"加速引擎\", \"name\": \"安全\", \"value\": \"硬件隔离\", \"unit\": \"\"}]",
@@ -1679,8 +1679,8 @@
       "is_hot": 0,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782140840555,
-      "db_version": 7
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 70,
@@ -1689,7 +1689,7 @@
       "manufacturer_id": 9,
       "category_id": 8,
       "architecture": "自研ASIC",
-      "process_node": "—",
+      "process_node": "推测16nm",
       "release_date": "2020-11",
       "key_specs_json": "{\"网络\": \"100Gbps\", \"新增\": \"Nitro Enclaves\", \"安全\": \"可信执行环境\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"网络带宽\", \"value\": \"100\", \"unit\": \"Gbps\"}, {\"group\": \"加速引擎\", \"name\": \"网络卸载\", \"value\": \"VPC+ENA+EFA\", \"unit\": \"\"}, {\"group\": \"加速引擎\", \"name\": \"安全\", \"value\": \"Nitro Enclaves\", \"unit\": \"TEE\"}, {\"group\": \"加速引擎\", \"name\": \"存储卸载\", \"value\": \"EBS+NVMe\", \"unit\": \"\"}]",
@@ -1699,8 +1699,8 @@
       "is_hot": 1,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782140840555,
-      "db_version": 7
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 71,
@@ -2529,7 +2529,7 @@
       "manufacturer_id": 19,
       "category_id": 8,
       "architecture": "自研DPU",
-      "process_node": "—",
+      "process_node": "Samsung 14nm",
       "release_date": "2023-02",
       "key_specs_json": "{\"网络\": \"32Gbps\", \"加速\": \"全虚拟化\", \"定位\": \"火山引擎云\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"网络带宽\", \"value\": \"32\", \"unit\": \"Gbps\"}, {\"group\": \"加速引擎\", \"name\": \"虚拟化\", \"value\": \"全虚拟化卸载\", \"unit\": \"\"}, {\"group\": \"加速引擎\", \"name\": \"本地盘\", \"value\": \"优化\", \"unit\": \"\"}]",
@@ -2539,8 +2539,8 @@
       "is_hot": 1,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 113,
@@ -2549,7 +2549,7 @@
       "manufacturer_id": 19,
       "category_id": 8,
       "architecture": "自研DPU 2.0",
-      "process_node": "—",
+      "process_node": "Samsung 7nm",
       "release_date": "2025-06",
       "key_specs_json": "{\"网络\": \"200Gbps\", \"RoCE\": \"800G集群\", \"定位\": \"AI数据中心\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"网络带宽\", \"value\": \"200\", \"unit\": \"Gbps\"}, {\"group\": \"网络规格\", \"name\": \"RoCE\", \"value\": \"4x200G\", \"unit\": \"\"}, {\"group\": \"加速引擎\", \"name\": \"存储\", \"value\": \"NVMe-oF\", \"unit\": \"\"}]",
@@ -2559,8 +2559,8 @@
       "is_hot": 1,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 114,
@@ -2569,7 +2569,7 @@
       "manufacturer_id": 20,
       "category_id": 8,
       "architecture": "自研DPU",
-      "process_node": "—",
+      "process_node": "推测16nm(FPGA)",
       "release_date": "2022-06",
       "key_specs_json": "{\"网络\": \"100Gbps\", \"加速\": \"网络/存储\", \"实例\": \"腾讯云CVM\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"网络带宽\", \"value\": \"100\", \"unit\": \"Gbps\"}, {\"group\": \"加速引擎\", \"name\": \"网络\", \"value\": \"VPC/SLB卸载\", \"unit\": \"\"}, {\"group\": \"加速引擎\", \"name\": \"存储\", \"value\": \"CBS卸载\", \"unit\": \"\"}]",
@@ -2579,8 +2579,8 @@
       "is_hot": 1,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 115,
@@ -2589,18 +2589,18 @@
       "manufacturer_id": 20,
       "category_id": 8,
       "architecture": "自研DPU 2.0",
-      "process_node": "—",
+      "process_node": "推测28nm(未确认产品)",
       "release_date": "2024-09",
       "key_specs_json": "{\"网络\": \"200Gbps\", \"加速\": \"网络/存储/安全\", \"定位\": \"AI云\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"网络带宽\", \"value\": \"200\", \"unit\": \"Gbps\"}, {\"group\": \"加速引擎\", \"name\": \"网络\", \"value\": \"全硬件VPC卸载\", \"unit\": \"\"}, {\"group\": \"加速引擎\", \"name\": \"安全\", \"value\": \"硬件加密\", \"unit\": \"\"}]",
-      "description": "腾讯第二代DPU紫杉，200Gbps，全硬件虚拟化，面向AI云",
+      "description": "紫杉DPU（特定行业用户命名，确切产品信息待核实）",
       "image_path": "",
       "search_keywords": "紫杉,PurpleFir,腾讯,DPU,200G",
       "is_hot": 1,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 116,
@@ -2609,7 +2609,7 @@
       "manufacturer_id": 21,
       "category_id": 8,
       "architecture": "自研DPU SoC",
-      "process_node": "—",
+      "process_node": "推测22nm",
       "release_date": "2023-06",
       "key_specs_json": "{\"网络\": \"100Gbps\", \"定位\": \"云网络加速\", \"功能\": \"OVS卸载\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"网络带宽\", \"value\": \"100\", \"unit\": \"Gbps\"}, {\"group\": \"加速引擎\", \"name\": \"OVS卸载\", \"value\": \"硬件级\", \"unit\": \"\"}]",
@@ -2619,8 +2619,8 @@
       "is_hot": 0,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 117,
@@ -2629,7 +2629,7 @@
       "manufacturer_id": 21,
       "category_id": 8,
       "architecture": "自研DPU SoC 2.0",
-      "process_node": "—",
+      "process_node": "Intel 22nm",
       "release_date": "2025-03",
       "key_specs_json": "{\"网络\": \"200Gbps\", \"加速\": \"网络/存储/安全\", \"定位\": \"AI集群\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"网络带宽\", \"value\": \"200\", \"unit\": \"Gbps\"}, {\"group\": \"加速引擎\", \"name\": \"存储\", \"value\": \"NVMe-oF\", \"unit\": \"\"}, {\"group\": \"加速引擎\", \"name\": \"安全\", \"value\": \"硬件隔离\", \"unit\": \"\"}]",
@@ -2639,8 +2639,8 @@
       "is_hot": 0,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 118,
@@ -2649,7 +2649,7 @@
       "manufacturer_id": 22,
       "category_id": 8,
       "architecture": "NFP SoC-NP",
-      "process_node": "—",
+      "process_node": "推测28nm",
       "release_date": "2021-08",
       "key_specs_json": "{\"网络\": \"2x25GbE\", \"架构\": \"多核SoC-NP\", \"定位\": \"智能网卡\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"网络带宽\", \"value\": \"2x25\", \"unit\": \"GbE\"}, {\"group\": \"加速引擎\", \"name\": \"OVS卸载\", \"value\": \"吞吐提升87%\", \"unit\": \"\"}, {\"group\": \"处理核心\", \"name\": \"架构\", \"value\": \"多核SoC-NP\", \"unit\": \"\"}]",
@@ -2659,8 +2659,8 @@
       "is_hot": 0,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 119,
@@ -2669,7 +2669,7 @@
       "manufacturer_id": 22,
       "category_id": 8,
       "architecture": "NFP SoC-NP 2.0",
-      "process_node": "—",
+      "process_node": "推测28nm",
       "release_date": "2023-12",
       "key_specs_json": "{\"网络\": \"2x100GbE\", \"加速\": \"网络/存储/安全\", \"定位\": \"全功能DPU\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"网络带宽\", \"value\": \"2x100\", \"unit\": \"GbE\"}, {\"group\": \"加速引擎\", \"name\": \"存储\", \"value\": \"NVMe-oF\", \"unit\": \"\"}, {\"group\": \"加速引擎\", \"name\": \"安全\", \"value\": \"IPSec/TLS\", \"unit\": \"\"}]",
@@ -2679,8 +2679,8 @@
       "is_hot": 0,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 120,
@@ -2689,7 +2689,7 @@
       "manufacturer_id": 23,
       "category_id": 8,
       "architecture": "自研DPU SoC",
-      "process_node": "—",
+      "process_node": "推测28nm",
       "release_date": "2024-01",
       "key_specs_json": "{\"网络\": \"100Gbps\", \"定位\": \"云网络加速\", \"功能\": \"vSwitch卸载\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"网络带宽\", \"value\": \"100\", \"unit\": \"Gbps\"}, {\"group\": \"加速引擎\", \"name\": \"vSwitch\", \"value\": \"全硬件卸载\", \"unit\": \"\"}]",
@@ -2699,8 +2699,8 @@
       "is_hot": 0,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 121,
@@ -2709,7 +2709,7 @@
       "manufacturer_id": 23,
       "category_id": 8,
       "architecture": "自研DPU SoC 2.0",
-      "process_node": "—",
+      "process_node": "推测28nm",
       "release_date": "2025-09",
       "key_specs_json": "{\"网络\": \"200Gbps\", \"加速\": \"网络/存储\", \"定位\": \"AI训练加速\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"网络带宽\", \"value\": \"200\", \"unit\": \"Gbps\"}, {\"group\": \"加速引擎\", \"name\": \"存储\", \"value\": \"NVMe-oF\", \"unit\": \"\"}]",
@@ -2719,8 +2719,8 @@
       "is_hot": 0,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 122,
@@ -2729,7 +2729,7 @@
       "manufacturer_id": 24,
       "category_id": 8,
       "architecture": "自研DPU",
-      "process_node": "—",
+      "process_node": "推测28nm",
       "release_date": "2024-06",
       "key_specs_json": "{\"网络\": \"100Gbps\", \"定位\": \"数据中心卸载\", \"功能\": \"网络/存储\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"网络带宽\", \"value\": \"100\", \"unit\": \"Gbps\"}, {\"group\": \"加速引擎\", \"name\": \"存储\", \"value\": \"EBS卸载\", \"unit\": \"\"}]",
@@ -2739,8 +2739,8 @@
       "is_hot": 0,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 123,
@@ -2749,7 +2749,7 @@
       "manufacturer_id": 24,
       "category_id": 8,
       "architecture": "自研DPU 2.0",
-      "process_node": "—",
+      "process_node": "推测28nm",
       "release_date": "2026-01",
       "key_specs_json": "{\"网络\": \"200Gbps\", \"加速\": \"网络/存储/安全\", \"定位\": \"AI集群\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"网络带宽\", \"value\": \"200\", \"unit\": \"Gbps\"}, {\"group\": \"加速引擎\", \"name\": \"安全\", \"value\": \"机密计算\", \"unit\": \"\"}]",
@@ -2759,8 +2759,8 @@
       "is_hot": 0,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 124,
@@ -2869,7 +2869,7 @@
       "manufacturer_id": 25,
       "category_id": 9,
       "architecture": "Retimer/DSP",
-      "process_node": "—",
+      "process_node": "推测28nm",
       "release_date": "2019-06",
       "key_specs_json": "{\"速率\": \"100G\", \"通道\": \"4x25G NRZ\", \"类型\": \"Retimer\"}",
       "detail_specs_json": "[{\"group\": \"性能规格\", \"name\": \"单通道速率\", \"value\": \"25\", \"unit\": \"Gbps NRZ\"}, {\"group\": \"性能规格\", \"name\": \"总带宽\", \"value\": \"100\", \"unit\": \"Gbps\"}]",
@@ -2879,8 +2879,8 @@
       "is_hot": 0,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 130,
@@ -2889,7 +2889,7 @@
       "manufacturer_id": 25,
       "category_id": 9,
       "architecture": "PAM4 DSP",
-      "process_node": "—",
+      "process_node": "推测28nm",
       "release_date": "2021-03",
       "key_specs_json": "{\"速率\": \"200G\", \"通道\": \"4x50G PAM4\", \"类型\": \"DSP\"}",
       "detail_specs_json": "[{\"group\": \"性能规格\", \"name\": \"单通道速率\", \"value\": \"50\", \"unit\": \"Gbps PAM4\"}, {\"group\": \"性能规格\", \"name\": \"总带宽\", \"value\": \"200\", \"unit\": \"Gbps\"}]",
@@ -2899,8 +2899,8 @@
       "is_hot": 0,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 131,
@@ -2909,7 +2909,7 @@
       "manufacturer_id": 25,
       "category_id": 9,
       "architecture": "PAM4 DSP",
-      "process_node": "—",
+      "process_node": "推测28nm",
       "release_date": "2023-03",
       "key_specs_json": "{\"速率\": \"400G\", \"通道\": \"4x100G PAM4\", \"AEC\": \"有源电缆\"}",
       "detail_specs_json": "[{\"group\": \"性能规格\", \"name\": \"单通道速率\", \"value\": \"100\", \"unit\": \"Gbps PAM4\"}, {\"group\": \"性能规格\", \"name\": \"总带宽\", \"value\": \"400\", \"unit\": \"Gbps\"}]",
@@ -2919,8 +2919,8 @@
       "is_hot": 0,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 132,
@@ -2929,7 +2929,7 @@
       "manufacturer_id": 25,
       "category_id": 9,
       "architecture": "PAM4 DSP",
-      "process_node": "—",
+      "process_node": "推测28nm",
       "release_date": "2025-06",
       "key_specs_json": "{\"速率\": \"800G\", \"通道\": \"8x100G PAM4\", \"定位\": \"AI集群\"}",
       "detail_specs_json": "[{\"group\": \"性能规格\", \"name\": \"单通道速率\", \"value\": \"100\", \"unit\": \"Gbps PAM4\"}, {\"group\": \"性能规格\", \"name\": \"总带宽\", \"value\": \"800\", \"unit\": \"Gbps\"}]",
@@ -2939,8 +2939,8 @@
       "is_hot": 1,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 133,
@@ -2949,7 +2949,7 @@
       "manufacturer_id": 26,
       "category_id": 9,
       "architecture": "PAM4 DSP",
-      "process_node": "—",
+      "process_node": "TSMC 12nm",
       "release_date": "2024-03",
       "key_specs_json": "{\"速率\": \"100G\", \"通道\": \"4x25G\", \"定位\": \"国产替代\"}",
       "detail_specs_json": "[{\"group\": \"性能规格\", \"name\": \"单通道\", \"value\": \"25\", \"unit\": \"Gbps\"}, {\"group\": \"性能规格\", \"name\": \"总带宽\", \"value\": \"100\", \"unit\": \"Gbps\"}]",
@@ -2959,8 +2959,8 @@
       "is_hot": 0,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 134,
@@ -2969,7 +2969,7 @@
       "manufacturer_id": 26,
       "category_id": 9,
       "architecture": "PAM4 DSP",
-      "process_node": "—",
+      "process_node": "TSMC 12nm",
       "release_date": "2025-09",
       "key_specs_json": "{\"速率\": \"200G\", \"通道\": \"4x50G PAM4\", \"定位\": \"国产升级\"}",
       "detail_specs_json": "[{\"group\": \"性能规格\", \"name\": \"单通道\", \"value\": \"50\", \"unit\": \"Gbps PAM4\"}, {\"group\": \"性能规格\", \"name\": \"总带宽\", \"value\": \"200\", \"unit\": \"Gbps\"}]",
@@ -2979,8 +2979,8 @@
       "is_hot": 0,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 135,
@@ -2989,7 +2989,7 @@
       "manufacturer_id": 27,
       "category_id": 9,
       "architecture": "DSP",
-      "process_node": "—",
+      "process_node": "推测28nm",
       "release_date": "2023-06",
       "key_specs_json": "{\"速率\": \"100G\", \"定位\": \"国产光模块DSP\"}",
       "detail_specs_json": "[{\"group\": \"性能规格\", \"name\": \"总带宽\", \"value\": \"100\", \"unit\": \"Gbps\"}]",
@@ -2999,8 +2999,8 @@
       "is_hot": 0,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 136,
@@ -3009,7 +3009,7 @@
       "manufacturer_id": 27,
       "category_id": 9,
       "architecture": "PAM4 DSP",
-      "process_node": "—",
+      "process_node": "推测28nm",
       "release_date": "2025-03",
       "key_specs_json": "{\"速率\": \"200G\", \"通道\": \"4x50G PAM4\", \"定位\": \"国产升级\"}",
       "detail_specs_json": "[{\"group\": \"性能规格\", \"name\": \"单通道\", \"value\": \"50\", \"unit\": \"Gbps PAM4\"}, {\"group\": \"性能规格\", \"name\": \"总带宽\", \"value\": \"200\", \"unit\": \"Gbps\"}]",
@@ -3019,8 +3019,8 @@
       "is_hot": 0,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 137,
@@ -3029,7 +3029,7 @@
       "manufacturer_id": 1,
       "category_id": 10,
       "architecture": "SmartNIC",
-      "process_node": "—",
+      "process_node": "TSMC 16nm",
       "release_date": "2019-03",
       "key_specs_json": "{\"速率\": \"200Gb/s\", \"PCIe\": \"4.0\", \"端口\": \"双口100G\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"最大带宽\", \"value\": \"200\", \"unit\": \"Gb/s\"}, {\"group\": \"网络规格\", \"name\": \"端口\", \"value\": \"双口100GbE\", \"unit\": \"\"}, {\"group\": \"互联规格\", \"name\": \"PCIe\", \"value\": \"4.0 x16\", \"unit\": \"\"}]",
@@ -3039,8 +3039,8 @@
       "is_hot": 0,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 138,
@@ -3049,7 +3049,7 @@
       "manufacturer_id": 1,
       "category_id": 10,
       "architecture": "SmartNIC",
-      "process_node": "—",
+      "process_node": "TSMC 7nm",
       "release_date": "2022-01",
       "key_specs_json": "{\"速率\": \"400Gb/s\", \"PCIe\": \"5.0\", \"IB\": \"NDR400\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"最大带宽\", \"value\": \"400\", \"unit\": \"Gb/s\"}, {\"group\": \"网络规格\", \"name\": \"InfiniBand\", \"value\": \"NDR400\", \"unit\": \"\"}, {\"group\": \"互联规格\", \"name\": \"PCIe\", \"value\": \"5.0 x16\", \"unit\": \"\"}]",
@@ -3059,8 +3059,8 @@
       "is_hot": 1,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 139,
@@ -3069,7 +3069,7 @@
       "manufacturer_id": 1,
       "category_id": 10,
       "architecture": "SuperNIC",
-      "process_node": "—",
+      "process_node": "推测5nm",
       "release_date": "2025-03",
       "key_specs_json": "{\"速率\": \"800Gb/s\", \"PCIe\": \"6.0\", \"IB\": \"XDR800\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"最大带宽\", \"value\": \"800\", \"unit\": \"Gb/s\"}, {\"group\": \"网络规格\", \"name\": \"InfiniBand\", \"value\": \"XDR800\", \"unit\": \"\"}, {\"group\": \"互联规格\", \"name\": \"PCIe\", \"value\": \"6.0\", \"unit\": \"\"}]",
@@ -3079,8 +3079,8 @@
       "is_hot": 1,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 140,
@@ -3089,7 +3089,7 @@
       "manufacturer_id": 1,
       "category_id": 10,
       "architecture": "SuperNIC 2.0",
-      "process_node": "—",
+      "process_node": "TSMC 3nm",
       "release_date": "2026-06",
       "key_specs_json": "{\"速率\": \"1.6Tb/s\", \"PCIe\": \"6.0\", \"IB\": \"GDR1.6T\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"最大带宽\", \"value\": \"1.6\", \"unit\": \"Tb/s\"}, {\"group\": \"互联规格\", \"name\": \"PCIe\", \"value\": \"6.0\", \"unit\": \"\"}]",
@@ -3099,8 +3099,8 @@
       "is_hot": 1,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 141,
@@ -3109,7 +3109,7 @@
       "manufacturer_id": 11,
       "category_id": 10,
       "architecture": "NIC ASIC",
-      "process_node": "—",
+      "process_node": "TSMC 5nm",
       "release_date": "2023-10",
       "key_specs_json": "{\"速率\": \"400GbE\", \"PCIe\": \"5.0\", \"定位\": \"数据中心\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"最大带宽\", \"value\": \"400\", \"unit\": \"GbE\"}, {\"group\": \"互联规格\", \"name\": \"PCIe\", \"value\": \"5.0\", \"unit\": \"\"}]",
@@ -3119,8 +3119,8 @@
       "is_hot": 1,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 142,
@@ -3129,7 +3129,7 @@
       "manufacturer_id": 4,
       "category_id": 10,
       "architecture": "iNIC",
-      "process_node": "—",
+      "process_node": "TSMC 16nm",
       "release_date": "2020-06",
       "key_specs_json": "{\"速率\": \"100GbE\", \"PCIe\": \"4.0\", \"定位\": \"华为云\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"最大带宽\", \"value\": \"100\", \"unit\": \"GbE\"}, {\"group\": \"互联规格\", \"name\": \"PCIe\", \"value\": \"4.0\", \"unit\": \"\"}]",
@@ -3139,8 +3139,8 @@
       "is_hot": 1,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 143,
@@ -3149,7 +3149,7 @@
       "manufacturer_id": 4,
       "category_id": 10,
       "architecture": "iNIC 2.0",
-      "process_node": "—",
+      "process_node": "推测16nm",
       "release_date": "2024-03",
       "key_specs_json": "{\"速率\": \"400GbE\", \"PCIe\": \"5.0\", \"定位\": \"AI集群\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"最大带宽\", \"value\": \"400\", \"unit\": \"GbE\"}, {\"group\": \"互联规格\", \"name\": \"PCIe\", \"value\": \"5.0\", \"unit\": \"\"}]",
@@ -3159,8 +3159,8 @@
       "is_hot": 1,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 144,
@@ -3169,7 +3169,7 @@
       "manufacturer_id": 14,
       "category_id": 10,
       "architecture": "自研NIC",
-      "process_node": "—",
+      "process_node": "推测7nm",
       "release_date": "2024-09",
       "key_specs_json": "{\"速率\": \"200GbE\", \"PCIe\": \"5.0\", \"定位\": \"阿里云\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"最大带宽\", \"value\": \"200\", \"unit\": \"GbE\"}, {\"group\": \"互联规格\", \"name\": \"PCIe\", \"value\": \"5.0\", \"unit\": \"\"}]",
@@ -3179,8 +3179,8 @@
       "is_hot": 1,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1782142514987,
-      "db_version": 9
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 145,
@@ -3189,7 +3189,7 @@
       "manufacturer_id": 1,
       "category_id": 10,
       "architecture": "SmartNIC",
-      "process_node": "—",
+      "process_node": "推测28nm",
       "release_date": "2015-06",
       "key_specs_json": "{\"速率\": \"100Gb/s\", \"PCIe\": \"3.0\", \"RoCE\": \"v2\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"最大带宽\", \"value\": \"100\", \"unit\": \"Gb/s\"}, {\"group\": \"网络规格\", \"name\": \"端口\", \"value\": \"双口50GbE\", \"unit\": \"\"}, {\"group\": \"互联规格\", \"name\": \"PCIe\", \"value\": \"3.0 x8\", \"unit\": \"\"}]",
@@ -3199,8 +3199,8 @@
       "is_hot": 0,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782143193130,
-      "db_version": 10
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 146,
@@ -3209,7 +3209,7 @@
       "manufacturer_id": 1,
       "category_id": 10,
       "architecture": "SmartNIC",
-      "process_node": "—",
+      "process_node": "推测28nm",
       "release_date": "2017-06",
       "key_specs_json": "{\"速率\": \"100Gb/s\", \"PCIe\": \"4.0\", \"加速\": \"NVMe-oF\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"最大带宽\", \"value\": \"100\", \"unit\": \"Gb/s\"}, {\"group\": \"网络规格\", \"name\": \"端口\", \"value\": \"双口100GbE\", \"unit\": \"\"}, {\"group\": \"互联规格\", \"name\": \"PCIe\", \"value\": \"4.0 x16\", \"unit\": \"\"}]",
@@ -3219,8 +3219,8 @@
       "is_hot": 0,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782143193130,
-      "db_version": 10
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 147,
@@ -3229,7 +3229,7 @@
       "manufacturer_id": 11,
       "category_id": 10,
       "architecture": "NIC ASIC",
-      "process_node": "—",
+      "process_node": "TSMC 16nm",
       "release_date": "2019-06",
       "key_specs_json": "{\"速率\": \"2x100GbE\", \"PCIe\": \"4.0\", \"定位\": \"企业数据中心\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"最大带宽\", \"value\": \"2x100\", \"unit\": \"GbE\"}, {\"group\": \"互联规格\", \"name\": \"PCIe\", \"value\": \"4.0\", \"unit\": \"\"}]",
@@ -3239,8 +3239,8 @@
       "is_hot": 0,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782143193130,
-      "db_version": 10
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 148,
@@ -3249,7 +3249,7 @@
       "manufacturer_id": 11,
       "category_id": 10,
       "architecture": "NIC ASIC",
-      "process_node": "—",
+      "process_node": "TSMC 16nm",
       "release_date": "2021-06",
       "key_specs_json": "{\"速率\": \"200GbE\", \"PCIe\": \"4.0\", \"定位\": \"云数据中心\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"最大带宽\", \"value\": \"200\", \"unit\": \"GbE\"}, {\"group\": \"互联规格\", \"name\": \"PCIe\", \"value\": \"4.0\", \"unit\": \"\"}]",
@@ -3259,8 +3259,8 @@
       "is_hot": 0,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782143193130,
-      "db_version": 10
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 149,
@@ -3289,7 +3289,7 @@
       "manufacturer_id": 4,
       "category_id": 10,
       "architecture": "iNIC v1.2",
-      "process_node": "—",
+      "process_node": "推测16nm",
       "release_date": "2022-03",
       "key_specs_json": "{\"速率\": \"2x100GbE\", \"PCIe\": \"4.0\", \"定位\": \"鲲鹏服务器\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"最大带宽\", \"value\": \"2x100\", \"unit\": \"GbE\"}, {\"group\": \"互联规格\", \"name\": \"PCIe\", \"value\": \"4.0\", \"unit\": \"\"}]",
@@ -3299,8 +3299,8 @@
       "is_hot": 0,
       "is_new": 0,
       "is_deleted": 0,
-      "update_time": 1782143193130,
-      "db_version": 10
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 151,
@@ -3309,7 +3309,7 @@
       "manufacturer_id": 4,
       "category_id": 10,
       "architecture": "iNIC 3.0",
-      "process_node": "—",
+      "process_node": "推测7nm",
       "release_date": "2025-06",
       "key_specs_json": "{\"速率\": \"800GbE\", \"PCIe\": \"6.0\", \"定位\": \"AI超节点\"}",
       "detail_specs_json": "[{\"group\": \"网络规格\", \"name\": \"最大带宽\", \"value\": \"800\", \"unit\": \"GbE\"}, {\"group\": \"互联规格\", \"name\": \"PCIe\", \"value\": \"6.0\", \"unit\": \"\"}]",
@@ -3319,8 +3319,8 @@
       "is_hot": 1,
       "is_new": 1,
       "is_deleted": 0,
-      "update_time": 1782143193130,
-      "db_version": 10
+      "update_time": 1782486999980,
+      "db_version": 11
     },
     {
       "id": 152,
@@ -3661,6 +3661,186 @@
       "is_deleted": 0,
       "update_time": 1782143193130,
       "db_version": 10
+    },
+    {
+      "id": 169,
+      "name": "Axion C4A",
+      "model": "Google Axion C4A",
+      "manufacturer_id": 6,
+      "category_id": 3,
+      "architecture": "Arm Neoverse V2",
+      "process_node": "TSMC 5nm",
+      "release_date": "2024-10",
+      "key_specs_json": "{\"核心数\": \"72核\", \"内存\": \"384GB DDR5\", \"定位\": \"性能型实例\"}",
+      "detail_specs_json": "[{\"group\": \"核心规格\", \"name\": \"核心架构\", \"value\": \"Neoverse V2\", \"unit\": \"\"}, {\"group\": \"核心规格\", \"name\": \"核心数\", \"value\": \"72\", \"unit\": \"核\"}, {\"group\": \"核心规格\", \"name\": \"指令集\", \"value\": \"Armv9-A SVE2\", \"unit\": \"\"}, {\"group\": \"内存规格\", \"name\": \"最大内存\", \"value\": \"384\", \"unit\": \"GB DDR5\"}, {\"group\": \"性能对比\", \"name\": \"vs x86同代\", \"value\": \"快50%\", \"unit\": \"\"}, {\"group\": \"性能对比\", \"name\": \"能效优势\", \"value\": \"高60%\", \"unit\": \"\"}]",
+      "description": "Google首款自研数据中心CPU Axion C4A，基于Arm Neoverse V2，72核，2024年10月GA，性能比同代x86实例高50%、能效高60%",
+      "image_path": "",
+      "search_keywords": "Axion C4A,Google,Axion,Neoverse V2,自研CPU,Arm",
+      "is_hot": 1,
+      "is_new": 1,
+      "is_deleted": 0,
+      "update_time": 1782483628841,
+      "db_version": 11
+    },
+    {
+      "id": 170,
+      "name": "Axion N4A",
+      "model": "Google Axion N4A",
+      "manufacturer_id": 6,
+      "category_id": 3,
+      "architecture": "Arm Neoverse N3",
+      "process_node": "TSMC 5nm",
+      "release_date": "2026-05",
+      "key_specs_json": "{\"核心数\": \"64核\", \"内存\": \"512GB DDR5\", \"定位\": \"能效型实例\"}",
+      "detail_specs_json": "[{\"group\": \"核心规格\", \"name\": \"核心架构\", \"value\": \"Neoverse N3\", \"unit\": \"\"}, {\"group\": \"核心规格\", \"name\": \"核心数\", \"value\": \"64\", \"unit\": \"核\"}, {\"group\": \"核心规格\", \"name\": \"指令集\", \"value\": \"Armv9-A\", \"unit\": \"\"}, {\"group\": \"内存规格\", \"name\": \"最大内存\", \"value\": \"512\", \"unit\": \"GB DDR5\"}, {\"group\": \"性能对比\", \"name\": \"vs Graviton4\", \"value\": \"快~10%\", \"unit\": \"\"}]",
+      "description": "Google Axion N4A能效型实例，基于Arm Neoverse N3，64核，2026年5月GA，适合成本优化的微服务/Web/大数据场景",
+      "image_path": "",
+      "search_keywords": "Axion N4A,Google,Axion,Neoverse N3,自研CPU",
+      "is_hot": 1,
+      "is_new": 1,
+      "is_deleted": 0,
+      "update_time": 1782483628841,
+      "db_version": 11
+    },
+    {
+      "id": 171,
+      "name": "EPYC 9845",
+      "model": "EPYC 9845",
+      "manufacturer_id": 2,
+      "category_id": 3,
+      "architecture": "Zen 5c (Turin)",
+      "process_node": "TSMC 3nm",
+      "release_date": "2024-10",
+      "key_specs_json": "{\"核心数\": \"160C/320T\", \"基础频率\": \"2.1GHz\", \"TDP\": \"480W\", \"L3缓存\": \"512MB\"}",
+      "detail_specs_json": "[{\"group\": \"核心规格\", \"name\": \"核心数\", \"value\": \"160\", \"unit\": \"核\"}, {\"group\": \"核心规格\", \"name\": \"线程数\", \"value\": \"320\", \"unit\": \"线程\"}, {\"group\": \"核心规格\", \"name\": \"基础频率\", \"value\": \"2.1\", \"unit\": \"GHz\"}, {\"group\": \"缓存规格\", \"name\": \"L3缓存\", \"value\": \"512\", \"unit\": \"MB\"}, {\"group\": \"内存支持\", \"name\": \"内存类型\", \"value\": \"DDR5\", \"unit\": \"\"}, {\"group\": \"内存支持\", \"name\": \"最大通道数\", \"value\": \"12\", \"unit\": \"\"}, {\"group\": \"互联规格\", \"name\": \"PCIe版本\", \"value\": \"5.0\", \"unit\": \"\"}, {\"group\": \"物理规格\", \"name\": \"TDP\", \"value\": \"480\", \"unit\": \"W\"}]",
+      "description": "AMD EPYC Turin 9845，160核320线程Zen 5c密集核心，512MB L3缓存",
+      "image_path": "",
+      "search_keywords": "EPYC 9845,EPYC9845,Turin,Zen5,AMD",
+      "is_hot": 0,
+      "is_new": 1,
+      "is_deleted": 0,
+      "update_time": 1782483628841,
+      "db_version": 11
+    },
+    {
+      "id": 172,
+      "name": "EPYC 9755",
+      "model": "EPYC 9755",
+      "manufacturer_id": 2,
+      "category_id": 3,
+      "architecture": "Zen 5 (Turin)",
+      "process_node": "TSMC 4nm",
+      "release_date": "2024-10",
+      "key_specs_json": "{\"核心数\": \"128C/256T\", \"基础频率\": \"2.6GHz\", \"TDP\": \"400W\", \"L3缓存\": \"512MB\"}",
+      "detail_specs_json": "[{\"group\": \"核心规格\", \"name\": \"核心数\", \"value\": \"128\", \"unit\": \"核\"}, {\"group\": \"核心规格\", \"name\": \"线程数\", \"value\": \"256\", \"unit\": \"线程\"}, {\"group\": \"核心规格\", \"name\": \"基础频率\", \"value\": \"2.6\", \"unit\": \"GHz\"}, {\"group\": \"缓存规格\", \"name\": \"L3缓存\", \"value\": \"512\", \"unit\": \"MB\"}, {\"group\": \"内存支持\", \"name\": \"内存类型\", \"value\": \"DDR5-6000\", \"unit\": \"\"}, {\"group\": \"内存支持\", \"name\": \"最大通道数\", \"value\": \"12\", \"unit\": \"\"}, {\"group\": \"互联规格\", \"name\": \"PCIe版本\", \"value\": \"5.0\", \"unit\": \"\"}, {\"group\": \"物理规格\", \"name\": \"TDP\", \"value\": \"400\", \"unit\": \"W\"}]",
+      "description": "AMD EPYC Turin 9755，128核256线程Zen 5核心，512MB L3缓存，400W",
+      "image_path": "",
+      "search_keywords": "EPYC 9755,EPYC9755,Turin,Zen5,AMD",
+      "is_hot": 0,
+      "is_new": 1,
+      "is_deleted": 0,
+      "update_time": 1782483628841,
+      "db_version": 11
+    },
+    {
+      "id": 173,
+      "name": "EPYC 9655",
+      "model": "EPYC 9655",
+      "manufacturer_id": 2,
+      "category_id": 3,
+      "architecture": "Zen 5 (Turin)",
+      "process_node": "TSMC 4nm",
+      "release_date": "2024-10",
+      "key_specs_json": "{\"核心数\": \"96C/192T\", \"基础频率\": \"2.4GHz\", \"TDP\": \"400W\", \"L3缓存\": \"384MB\"}",
+      "detail_specs_json": "[{\"group\": \"核心规格\", \"name\": \"核心数\", \"value\": \"96\", \"unit\": \"核\"}, {\"group\": \"核心规格\", \"name\": \"线程数\", \"value\": \"192\", \"unit\": \"线程\"}, {\"group\": \"核心规格\", \"name\": \"基础频率\", \"value\": \"2.4\", \"unit\": \"GHz\"}, {\"group\": \"缓存规格\", \"name\": \"L3缓存\", \"value\": \"384\", \"unit\": \"MB\"}, {\"group\": \"内存支持\", \"name\": \"内存类型\", \"value\": \"DDR5-6000\", \"unit\": \"\"}, {\"group\": \"内存支持\", \"name\": \"最大通道数\", \"value\": \"12\", \"unit\": \"\"}, {\"group\": \"互联规格\", \"name\": \"PCIe版本\", \"value\": \"5.0\", \"unit\": \"\"}, {\"group\": \"物理规格\", \"name\": \"TDP\", \"value\": \"400\", \"unit\": \"W\"}]",
+      "description": "AMD EPYC Turin 9655，96核192线程Zen 5，384MB L3，通用计算主力",
+      "image_path": "",
+      "search_keywords": "EPYC 9655,EPYC9655,Turin,Zen5,AMD",
+      "is_hot": 0,
+      "is_new": 1,
+      "is_deleted": 0,
+      "update_time": 1782483628841,
+      "db_version": 11
+    },
+    {
+      "id": 174,
+      "name": "EPYC 9555",
+      "model": "EPYC 9555",
+      "manufacturer_id": 2,
+      "category_id": 3,
+      "architecture": "Zen 5 (Turin)",
+      "process_node": "TSMC 4nm",
+      "release_date": "2024-10",
+      "key_specs_json": "{\"核心数\": \"64C/128T\", \"基础频率\": \"3.0GHz\", \"TDP\": \"360W\", \"L3缓存\": \"256MB\"}",
+      "detail_specs_json": "[{\"group\": \"核心规格\", \"name\": \"核心数\", \"value\": \"64\", \"unit\": \"核\"}, {\"group\": \"核心规格\", \"name\": \"线程数\", \"value\": \"128\", \"unit\": \"线程\"}, {\"group\": \"核心规格\", \"name\": \"基础频率\", \"value\": \"3.0\", \"unit\": \"GHz\"}, {\"group\": \"缓存规格\", \"name\": \"L3缓存\", \"value\": \"256\", \"unit\": \"MB\"}, {\"group\": \"内存支持\", \"name\": \"内存类型\", \"value\": \"DDR5-6000\", \"unit\": \"\"}, {\"group\": \"内存支持\", \"name\": \"最大通道数\", \"value\": \"12\", \"unit\": \"\"}, {\"group\": \"互联规格\", \"name\": \"PCIe版本\", \"value\": \"5.0\", \"unit\": \"\"}, {\"group\": \"物理规格\", \"name\": \"TDP\", \"value\": \"360\", \"unit\": \"W\"}]",
+      "description": "AMD EPYC Turin 9555，64核128线程Zen 5，3.0GHz高频，适合高单核性能场景",
+      "image_path": "",
+      "search_keywords": "EPYC 9555,EPYC9555,Turin,Zen5,AMD",
+      "is_hot": 0,
+      "is_new": 1,
+      "is_deleted": 0,
+      "update_time": 1782483628841,
+      "db_version": 11
+    },
+    {
+      "id": 175,
+      "name": "EPYC 9335",
+      "model": "EPYC 9335",
+      "manufacturer_id": 2,
+      "category_id": 3,
+      "architecture": "Zen 5 (Turin)",
+      "process_node": "TSMC 4nm",
+      "release_date": "2024-10",
+      "key_specs_json": "{\"核心数\": \"32C/64T\", \"基础频率\": \"3.0GHz\", \"TDP\": \"300W\", \"L3缓存\": \"128MB\"}",
+      "detail_specs_json": "[{\"group\": \"核心规格\", \"name\": \"核心数\", \"value\": \"32\", \"unit\": \"核\"}, {\"group\": \"核心规格\", \"name\": \"线程数\", \"value\": \"64\", \"unit\": \"线程\"}, {\"group\": \"核心规格\", \"name\": \"基础频率\", \"value\": \"3.0\", \"unit\": \"GHz\"}, {\"group\": \"缓存规格\", \"name\": \"L3缓存\", \"value\": \"128\", \"unit\": \"MB\"}, {\"group\": \"内存支持\", \"name\": \"内存类型\", \"value\": \"DDR5-6000\", \"unit\": \"\"}, {\"group\": \"内存支持\", \"name\": \"最大通道数\", \"value\": \"12\", \"unit\": \"\"}, {\"group\": \"互联规格\", \"name\": \"PCIe版本\", \"value\": \"5.0\", \"unit\": \"\"}, {\"group\": \"物理规格\", \"name\": \"TDP\", \"value\": \"300\", \"unit\": \"W\"}]",
+      "description": "AMD EPYC Turin 9335，32核64线程Zen 5入门款，300W，适合中等密度计算",
+      "image_path": "",
+      "search_keywords": "EPYC 9335,EPYC9335,Turin,Zen5,AMD",
+      "is_hot": 0,
+      "is_new": 1,
+      "is_deleted": 0,
+      "update_time": 1782483628841,
+      "db_version": 11
+    },
+    {
+      "id": 176,
+      "name": "Inferentia 1",
+      "model": "AWS Inferentia v1",
+      "manufacturer_id": 9,
+      "category_id": 7,
+      "architecture": "Inferentia v1",
+      "process_node": "TSMC 16nm",
+      "release_date": "2019-12",
+      "key_specs_json": "{\"INT8\": \"~128 TOPS\", \"定位\": \"云端推理\"}",
+      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"INT8推理\", \"value\": \"~128\", \"unit\": \"TOPS\"}, {\"group\": \"架构规格\", \"name\": \"设计特点\", \"value\": \"定制推理芯片\", \"unit\": \"\"}, {\"group\": \"部署场景\", \"name\": \"实例\", \"value\": \"Inf1\", \"unit\": \"\"}]",
+      "description": "AWS首款自研AI推理芯片Inferentia v1，~128 TOPS INT8，面向低成本云端推理",
+      "image_path": "",
+      "search_keywords": "Inferentia 1,Inferentia,AWS,推理芯片,Inf1",
+      "is_hot": 0,
+      "is_new": 0,
+      "is_deleted": 0,
+      "update_time": 1782486999980,
+      "db_version": 11
+    },
+    {
+      "id": 177,
+      "name": "Inferentia 2",
+      "model": "AWS Inferentia v2",
+      "manufacturer_id": 9,
+      "category_id": 7,
+      "architecture": "Inferentia v2",
+      "process_node": "TSMC 7nm",
+      "release_date": "2023-04",
+      "key_specs_json": "{\"INT8\": \"~400 TOPS\", \"定位\": \"高吞吐推理\"}",
+      "detail_specs_json": "[{\"group\": \"计算性能\", \"name\": \"INT8推理\", \"value\": \"~400\", \"unit\": \"TOPS\"}, {\"group\": \"架构规格\", \"name\": \"设计特点\", \"value\": \"定制推理芯片\", \"unit\": \"\"}, {\"group\": \"部署场景\", \"name\": \"实例\", \"value\": \"Inf2\", \"unit\": \"\"}]",
+      "description": "AWS第二代推理芯片Inferentia v2，~400 TOPS INT8，支持高速推理和模型部署",
+      "image_path": "",
+      "search_keywords": "Inferentia 2,Inferentia,AWS,推理芯片,Inf2",
+      "is_hot": 0,
+      "is_new": 0,
+      "is_deleted": 0,
+      "update_time": 1782486999980,
+      "db_version": 11
     }
   ]
 }

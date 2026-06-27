@@ -3,8 +3,8 @@ import { router } from '@kit.ArkUI'
 
 @Component
 export struct MinePage {
-  @State dbVersion: number = 10
-  @State chipCount: number = 168
+  @State dbVersion: number = 11
+  @State chipCount: number = 177
 
   build() {
     Column() {
@@ -39,7 +39,8 @@ export struct MinePage {
           .padding({ left: 16, right: 16, top: 16, bottom: 8 })
 
         Column() {
-          this.UpdateLogRow('2026-06-22', 'V2', '新增138款，总计168款芯片，覆盖30个厂商，11个大类')
+          this.UpdateLogRow('2026-06-27', 'V3', '新增对比功能，优化分类数量显示，界面精简')
+          this.UpdateLogRow('2026-06-22', 'V2', '新增138款，总计177款芯片，覆盖30个厂商，11个大类')
           this.UpdateLogRow('2026-06-21', 'V1', '收录30款芯片，覆盖6个大类、12家厂商')
         }
         .width('100%')
@@ -83,21 +84,6 @@ export struct MinePage {
       }
       .width('100%')
       .margin({ top: 12 })
-
-      // 预留：用户注册入口
-      Column() {
-        Row() {
-          Text('登录 / 注册').fontSize(15).fontColor('#CCC')
-          Blank()
-          Text('敬请期待').fontSize(13).fontColor('#DDD')
-        }
-        .width('100%')
-        .padding(16)
-        .backgroundColor('#FFFFFF')
-      }
-      .width('100%')
-      .margin({ top: 12 })
-      .enabled(false)
     }
     .width('100%').height('100%')
     .backgroundColor('#F5F6FA')

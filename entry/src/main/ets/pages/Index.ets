@@ -2,7 +2,6 @@
 import { SearchPage } from './SearchPage'
 import { CategoryPage } from './CategoryPage'
 import { ComparePage } from './ComparePage'
-import { ClusterPage } from './ClusterPage'
 import { MinePage } from './MinePage'
 
 interface TabItem {
@@ -18,7 +17,6 @@ struct Index {
     { title: '查询', icon: $r('app.media.tab_search') },
     { title: '分类', icon: $r('app.media.tab_category') },
     { title: '对比', icon: $r('app.media.tab_compare') },
-    { title: '集群', icon: $r('app.media.tab_cluster') },
     { title: '我的', icon: $r('app.media.tab_mine') }
   ]
 
@@ -29,8 +27,6 @@ struct Index {
       CategoryPage()
     } else if (index === 2) {
       ComparePage()
-    } else if (index === 3) {
-      ClusterPage()
     } else {
       MinePage()
     }

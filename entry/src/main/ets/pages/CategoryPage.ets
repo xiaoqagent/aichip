@@ -3,6 +3,7 @@ import { ChipModel } from '../model/ChipModel'
 import { CategoryDao } from '../dao/CategoryDao'
 import { ChipDao } from '../dao/ChipDao'
 import { ManufacturerDao } from '../dao/ManufacturerDao'
+import { RdbHelper } from '../database/RdbHelper'
 import { ChipCard } from '../components/ChipCard'
 import { hilog } from '@kit.PerformanceAnalysisKit'
 import { router } from '@kit.ArkUI'
@@ -24,6 +25,7 @@ export struct CategoryPage {
   @State isLoading: boolean = true
   @State sortMode: SortMode = 'default'
   @State filterMfrId: number = 0 // 0=全部
+  private chipCountMap: Map<number, number> = new Map()
   private chipCache: Map<string, ChipModel[]> = new Map()
   private context: Context = getContext()
 
@@ -36,11 +38,24 @@ export struct CategoryPage {
     try {
       this.categories = await CategoryDao.getAll(this.context)
       hilog.info(0x0001, TAG, `Categories loaded: ${this.categories.length}`)
+      // 加载每类芯片数量
+      await this.loadChipCounts()
     } catch (e) {
       hilog.error(0x0001, TAG, `Load categories failed: ${JSON.stringify(e)}`)
     } finally {
       this.isLoading = false
     }
+  }
+
+  async loadChipCounts() {
+    const store = await RdbHelper.getStore(this.context)
+    const rs = await store.querySql(
+      'SELECT category_id, COUNT(*) as c FROM chips WHERE is_deleted=0 GROUP BY category_id'
+    )
+    while (rs.goToNextRow()) {
+      this.chipCountMap.set(rs.getLong(0), rs.getLong(1))
+    }
+    rs.close()
   }
 
   async onCategoryTap(cat: CategoryModel) {
@@ -245,7 +260,7 @@ export struct CategoryPage {
                 Text(cat.description)
                   .fontSize(12).fontColor('#999').margin({ top: 4 })
                   .maxLines(2).textOverflow({ overflow: TextOverflow.Ellipsis })
-                Text('点击查看')
+                Text(`${this.chipCountMap.get(cat.id) ?? 0}款芯片`)
                   .fontSize(11).fontColor('#BFBFBF').margin({ top: 6 })
               }
               .width('100%')
