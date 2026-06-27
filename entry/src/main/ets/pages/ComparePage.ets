@@ -264,7 +264,7 @@ export struct ComparePage {
           `开始对比（${this.selectedIds.size}款）`)
           .width('100%').height(48)
           .fontSize(16).fontWeight(FontWeight.Medium)
-          .fontColor('#1A1A1A')
+          .fontColor('#FFFFFF')
           .backgroundColor(this.selectedIds.size >= 2 ? '#1A73E8' : '#CCC')
           .borderRadius(8)
           .enabled(this.selectedIds.size >= 2)
