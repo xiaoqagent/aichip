@@ -165,7 +165,7 @@ export struct SearchPage {
               .width(100).height(100).borderRadius(20)
 
             Text(`已收录AI基础设施产业相关芯片${this.chipCount}款，覆盖${this.mfrCount}厂商、${this.catCount}大类`)
-              .fontSize(13).fontColor('#999')
+              .fontSize(13).fontColor('#1A1A1A')
               .margin({ top: 16 })
               .textAlign(TextAlign.Center)
               .padding({ left: 32, right: 32 })
