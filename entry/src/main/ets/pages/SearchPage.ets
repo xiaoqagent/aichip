@@ -2,6 +2,7 @@ import { SearchBar } from '../components/SearchBar'
 import { ChipCard } from '../components/ChipCard'
 import { ChipModel } from '../model/ChipModel'
 import { ChipDao } from '../dao/ChipDao'
+import { RdbHelper } from '../database/RdbHelper'
 import { hilog } from '@kit.PerformanceAnalysisKit'
 import { router } from '@kit.ArkUI'
 import { preferences } from '@kit.ArkData'
@@ -17,12 +18,16 @@ export struct SearchPage {
   @State isLoading: boolean = false
   @State showHistory: boolean = true
   @State historyList: string[] = []
+  @State chipCount: number = 0
+  @State mfrCount: number = 0
+  @State catCount: number = 0
   private timerId: number = -1
   private searchCallCount: number = 0
   private context: Context = getContext()
 
   aboutToAppear() {
     this.loadHistory()
+    this.loadStats()
   }
 
   async loadHistory() {
@@ -32,6 +37,25 @@ export struct SearchPage {
       this.historyList = JSON.parse(raw) as string[]
     } catch (e) {
       this.historyList = []
+    }
+  }
+
+  async loadStats() {
+    try {
+      const store = await RdbHelper.getStore(this.context)
+      const rs1 = await store.querySql('SELECT COUNT(*) as c FROM chips WHERE is_deleted=0')
+      if (rs1.goToFirstRow()) this.chipCount = rs1.getLong(rs1.getColumnIndex('c'))
+      rs1.close()
+
+      const rs2 = await store.querySql('SELECT COUNT(*) as c FROM manufacturers')
+      if (rs2.goToFirstRow()) this.mfrCount = rs2.getLong(rs2.getColumnIndex('c'))
+      rs2.close()
+
+      const rs3 = await store.querySql('SELECT COUNT(*) as c FROM categories')
+      if (rs3.goToFirstRow()) this.catCount = rs3.getLong(rs3.getColumnIndex('c'))
+      rs3.close()
+    } catch (e) {
+      hilog.error(0x0001, TAG, `Load stats failed: ${JSON.stringify(e)}`)
     }
   }
 
@@ -109,30 +133,45 @@ export struct SearchPage {
     Column() {
       SearchBar({ value: $searchText, onChange: this.onTextChange.bind(this) })
 
-      if (this.searchText.length === 0 && this.showHistory && this.historyList.length > 0) {
-        // 搜索历史
-        List() {
-          ForEach(this.historyList.reverse(), (keyword: string) => {
-            ListItem() {
-              Row() {
-                Image($r('sys.symbol.magnifyingglass'))
-                  .width(16).height(16).fillColor('#999')
-                Text(keyword)
-                  .fontSize(14).fontColor('#666').margin({ left: 8 }).layoutWeight(1)
-                Image($r('sys.symbol.xmark'))
-                  .width(14).height(14).fillColor('#CCC')
-                  .onClick(() => {
-                    const i = this.historyList.indexOf(keyword)
-                    if (i >= 0) this.historyList.splice(i, 1)
-                  })
+      if (this.searchText.length === 0) {
+        if (this.historyList.length > 0) {
+          // 搜索历史
+          List() {
+            ForEach(this.historyList.reverse(), (keyword: string) => {
+              ListItem() {
+                Row() {
+                  Image($r('sys.symbol.magnifyingglass'))
+                    .width(16).height(16).fillColor('#999')
+                  Text(keyword)
+                    .fontSize(14).fontColor('#666').margin({ left: 8 }).layoutWeight(1)
+                  Image($r('sys.symbol.xmark'))
+                    .width(14).height(14).fillColor('#CCC')
+                    .onClick(() => {
+                      const i = this.historyList.indexOf(keyword)
+                      if (i >= 0) this.historyList.splice(i, 1)
+                    })
+                }
+                .width('100%')
+                .padding({ left: 16, right: 16, top: 10, bottom: 10 })
+                .onClick(() => { this.onHistoryTap(keyword) })
               }
-              .width('100%')
-              .padding({ left: 16, right: 16, top: 10, bottom: 10 })
-              .onClick(() => { this.onHistoryTap(keyword) })
-            }
-          })
+            })
+          }
+          .layoutWeight(1)
+        } else {
+          // 欢迎视图：图标 + 数据库统计
+          Column() {
+            Image($r('app.media.app_icon'))
+              .width(100).height(100).borderRadius(20)
+
+            Text(`已收录AI基础设施产业相关芯片${this.chipCount}款，覆盖${this.mfrCount}厂商、${this.catCount}大类`)
+              .fontSize(13).fontColor('#999')
+              .margin({ top: 16 })
+              .textAlign(TextAlign.Center)
+              .padding({ left: 32, right: 32 })
+          }
+          .width('100%').layoutWeight(1).justifyContent(FlexAlign.Center)
         }
-        .layoutWeight(1)
       }
 
       if (this.isLoading) {
